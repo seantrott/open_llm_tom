@@ -1,0 +1,8 @@
+model_path,model_shorthand,num_params,base_instruct
+meta-llama/Meta-Llama-3-70B,Llama 3 70b,70553706496,Base
+meta-llama/Meta-Llama-3-8B,Llama 3 8b,8030261248,Base
+meta-llama/Meta-Llama-3-8B-Instruct,Llama 3 8b instruct,8030261248,Instruct
+meta-llama/Meta-Llama-3-70B-Instruct,Llama 3 70b instruct,70553706496,Instruct
+meta-llama/Llama-3.1-70B,Llama 3.1 70b,70553706496,Base
+mistralai/Mixtral-8x7B-v0.1,Mixtral 8x7b,46702792704,Base
+mistralai/Mixtral-8x7B-Instruct-v0.1,Mixtral 8x7B Instruct,46702792704,Instruct

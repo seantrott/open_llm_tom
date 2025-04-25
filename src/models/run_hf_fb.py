@@ -13,11 +13,13 @@ MODELS = {
     "meta-llama/Meta-Llama-3-70B": "Llama 3 70b",
     "meta-llama/Meta-Llama-3-8B": "Llama 3 8b",
     "meta-llama/Meta-Llama-3-8B-Instruct": "Llama 3 8b instruct",
+    "meta-llama/Meta-Llama-3-70B-Instruct": "Llama 3 70b instruct",
     "meta-llama/Llama-3.1-70B": "Llama 3.1 70b",
     "mistralai/Mixtral-8x7B-v0.1": "Mixtral 8x7b",
-    "mistralai/Mixtral-8x22B-v0.1": "Mixtral 8x22b",
-    "EleutherAI/pythia-6.9b": "Pythia 6.9B",
-    "EleutherAI/pythia-12b": "Pythia 12B"
+    "mistralai/Mixtral-8x7B-Instruct-v0.1": "Mixtral 8x7B Instruct",
+    # "mistralai/Mixtral-8x22B-v0.1": "Mixtral 8x22b",
+    # "EleutherAI/pythia-6.9b": "Pythia 6.9B",
+    # "EleutherAI/pythia-12b": "Pythia 12B"
 }
 
 #### SETUP HF
@@ -97,7 +99,7 @@ def main(df_fb, model_path):
 if __name__ == "__main__":
 
     ### Select model
-    selected_model = "meta-llama/Meta-Llama-3-8B"
+    selected_model = "meta-llama/Meta-Llama-3-70B-Instruct"
     if selected_model not in MODELS:
         selected_model = None
         raise ValueError(f"Model {selected_model} not found in MODELS")

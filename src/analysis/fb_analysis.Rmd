@@ -1,0 +1,353 @@
+---
+title: "Analysis of False Belief Task"
+author: "Sean Trott"
+date: "April 24, 2025"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dpi = 300, fig.format = "png")
+```
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(lmtest)
+library(forcats)
+library(broom)
+library(lme4)
+library(viridis)
+library(ggridges)
+library(lmerTest)
+library(ggrepel)
+library(ggcorrplot)
+
+all_colors <- viridis::viridis(10, option = "mako")
+my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
+```
+
+# Load LLM data
+
+**TODO**: Load a separate `.csv` file with information about number of parameters, amount of training data, base vs. instruct.
+
+
+```{r}
+# setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
+directory_path <- "../../data/processed/fb/"
+csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
+csv_list <- csv_files %>%
+  map(~ read_csv(.))
+df_all_models <- bind_rows(csv_list)
+nrow(df_all_models)
+
+table(df_all_models$model_path)
+table(df_all_models$model_shorthand)
+
+
+### Load properties
+df_model_properties = read_csv("../../data/processed/model_properties.csv")
+
+df_all_models = df_all_models %>%
+  inner_join(df_model_properties) %>%
+  mutate(model_shorthand = str_to_title(model_shorthand))
+nrow(df_all_models)
+
+```
+
+
+# LLM Analysis
+
+## Sensitivity to mental states
+
+```{r}
+### Visualization
+df_all_models %>%
+  ggplot(aes(x = log_odds,
+             y = reorder(model_shorthand, num_params),
+             fill = condition)) +
+  geom_density_ridges2(aes(height = ..density..), 
+                       color=NA, 
+                       scale=.85, 
+                       # size=1, 
+                       alpha = .8,
+                       stat="density") +
+  labs(x = "Log Odds (Start vs. End)",
+       y = "",
+       fill = "") +
+  theme_minimal() +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  theme(
+    legend.position = "bottom"
+  ) + 
+  theme(axis.title = element_text(size=rel(1.2)),
+        axis.text = element_text(size = rel(1.2)),
+        legend.text = element_text(size = rel(1.2)),
+        legend.title = element_text(size = rel(1.2)),
+        strip.text.x = element_text(size = rel(1.2))) +
+    scale_fill_manual(values = viridisLite::viridis(2, option = "mako", 
+                                                    begin = 0.8, end = 0.15)) +
+  facet_wrap(~knowledge_cue)
+
+
+
+
+```
+
+Each model on its own:
+
+```{r}
+# Function to fit models and perform model comparison
+compare_models <- function(df) {
+  if (n_distinct(df$condition) < 2) return(NULL)  # Skip if only one condition
+  
+  mod_full <- tryCatch(
+    lmer(log_odds ~ condition + knowledge_cue + first_mention + recent_mention +
+           (1 + condition | start), data = df, REML = FALSE),
+    error = function(e) NULL
+  )
+  
+  mod_reduced <- tryCatch(
+    lmer(log_odds ~ knowledge_cue + first_mention + recent_mention +
+           (1 + condition | start), data = df, REML = FALSE),
+    error = function(e) NULL
+  )
+  
+  if (is.null(mod_full) || is.null(mod_reduced)) return(NULL)
+  
+  anova_result <- anova(mod_full, mod_reduced)
+  delta_aic <- AIC(mod_reduced) - AIC(mod_full)
+  lrt_stat <- anova_result$Chisq[2]
+  p_val <- anova_result$`Pr(>Chisq)`[2]
+  
+  # Extract condition coefficient from full model (assuming it's a factor and second level is the contrast)
+  cond_coef <- tryCatch({
+    coefs <- fixef(mod_full)
+    cond_name <- grep("^condition", names(coefs), value = TRUE)
+    coefs[cond_name]
+  }, error = function(e) NA)
+
+  tibble(
+    model_path = unique(df$model_path),
+    delta_AIC = delta_aic,
+    LRT_stat = lrt_stat,
+    p_value = p_val,
+    condition_coef = cond_coef
+  )
+}
+
+# Apply to each model_path
+results_by_model_path <- df_all_models %>%
+  group_by(model_path) %>%
+  group_split() %>%
+  map_dfr(compare_models)
+results_by_model_path
+```
+
+
+All models together:
+
+```{r}
+
+### Mixed models
+mod_full = lmer(data = df_all_models,
+                log_odds ~ condition + knowledge_cue + first_mention + recent_mention + 
+                  (1 + condition | model_path) + (1 + condition | start),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_all_models,
+                log_odds ~ knowledge_cue + first_mention + recent_mention + 
+                  (1 + condition | model_path) + (1 + condition | start),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+```
+
+
+## Accuracy metric
+
+**TODO**: Add in features like number of training tokens.
+
+```{r}
+df_all_models = df_all_models %>%
+  mutate(correct = case_when(
+    condition == "False Belief" & log_odds > 0 ~ TRUE,
+    condition == "True Belief" & log_odds <= 0 ~ TRUE,
+    TRUE ~ FALSE  # all other cases are incorrect
+  ))
+
+
+df_summ = df_all_models %>%
+  group_by(model_path, model_shorthand, num_params, base_instruct) %>%
+  summarise(mean_accuracy = mean(correct))
+df_summ
+
+
+
+df_summ %>%
+  ggplot(aes(x = num_params,
+             y = mean_accuracy,
+             color = base_instruct,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  geom_hline(yintercept = .83,##TODO: Calculate from scratch
+             linetype = "dotted", color = "red",
+             size = 1.2, alpha = .8) + 
+  geom_hline(yintercept = .5, linetype = "dotted",
+             size = 1.2, alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label=model_shorthand), size=3) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "Parameters",
+       y = "Accuracy",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(2, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+
+
+### How does model size predict accuracy?
+mod_full = glmer(data = df_all_models,
+                 correct ~ condition + knowledge_cue +
+                   log10(num_params) + base_instruct + 
+                   (1 | start), 
+                 family = binomial())
+summary(mod_full)
+
+
+```
+
+
+
+# Comparison to human baseline
+
+## Load human data
+
+```{r}
+df_human = read_csv("../../data/processed/human/human_fb_cleaned.csv") %>%
+  select(participant_id, item_id, passage,
+         is_correct, is_start, is_end,
+         reaction_time, condition, response)
+mean(df_human$is_correct)
+
+df_by_item = df_human %>%
+  group_by(condition, passage) %>%
+  summarise(p_start = mean(is_start) + .0001,
+            p_end = mean(is_end) + .0001) %>%
+  mutate(log_odds = log((p_start / p_end))) %>%
+  mutate(model_shorthand = "Human")
+
+
+### Merge
+df_merged = df_all_models %>%
+  bind_rows(df_by_item)
+```
+
+
+## Correlation matrix
+
+```{r}
+df_wide <- df_merged %>%
+  select(passage, model_shorthand, log_odds) %>%
+  pivot_wider(names_from = model_shorthand, values_from = log_odds)
+
+cor_matrix <- df_wide %>%
+  select(-passage) %>%
+  cor(use = "pairwise.complete.obs")
+cor_matrix
+
+# Plot the correlation matrix
+ggcorrplot(cor_matrix, 
+           hc.order = TRUE,
+           method = "square" 
+          )
+
+
+```
+
+
+## Baselines analysis
+
+First, merge with raw human data.
+
+```{r}
+df_human_shortened = df_human %>%
+  # mutate(human_is_start = is_start) %>%
+  select(participant_id, item_id, passage, condition, is_start, reaction_time)
+
+df_all_models_with_human = df_all_models %>%
+  inner_join(df_human_shortened)
+
+table(df_all_models_with_human$model_path)
+
+```
+
+Now, fit a baselines model for each LLM.
+
+**TODO**: Also get p-value for log-odds coefficient?
+
+```{r}
+fit_compare_glmer_by_model <- function(df) {
+  if (n_distinct(df$is_start) < 2) return(NULL)  # skip degenerate cases
+
+  # Fit full model
+  mod_full <- tryCatch(
+    glmer(is_start ~ condition + knowledge_cue + 
+            first_mention + recent_mention + log_odds +
+            (1 | item_id),
+          data = df,
+          family = binomial()),
+    error = function(e) NULL
+  )
+
+  # Fit reduced model (no condition)
+  mod_reduced <- tryCatch(
+    glmer(is_start ~ knowledge_cue + 
+            first_mention + recent_mention + log_odds +
+            (1 | item_id),
+          data = df,
+          family = binomial()),
+    error = function(e) NULL
+  )
+
+  if (is.null(mod_full) || is.null(mod_reduced)) return(NULL)
+
+  # Model comparison (Likelihood Ratio Test)
+  anova_result <- anova(mod_reduced, mod_full)
+  lrt_stat <- anova_result$Chisq[2]
+  p_val <- anova_result$`Pr(>Chisq)`[2]
+  delta_aic <- AIC(mod_reduced) - AIC(mod_full)
+
+  # Extract coefficient for log_odds
+  log_odds_coef <- tryCatch({
+    fixef(mod_full)["log_odds"]
+  }, error = function(e) NA)
+
+  tibble(
+    model_shorthand = unique(df$model_shorthand),
+    delta_AIC = delta_aic,
+    LRT_stat = lrt_stat,
+    p_value = p_val,
+    log_odds_coef = log_odds_coef
+  )
+}
+
+# Apply across model_shorthand groups
+glmer_model_comparisons <- df_all_models_with_human %>%
+  group_by(model_shorthand) %>%
+  group_split() %>%
+  map_dfr(fit_compare_glmer_by_model)
+
+glmer_model_comparisons
+```
+
+
