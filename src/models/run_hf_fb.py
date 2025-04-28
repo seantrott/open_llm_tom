@@ -17,6 +17,11 @@ MODELS = {
     "meta-llama/Llama-3.1-70B": "Llama 3.1 70b",
     "mistralai/Mixtral-8x7B-v0.1": "Mixtral 8x7b",
     "mistralai/Mixtral-8x7B-Instruct-v0.1": "Mixtral 8x7B Instruct",
+    "meta-llama/Llama-2-7b-hf": "Llama 2 7B",
+    "meta-llama/Llama-2-13b-hf": "Llama 2 13B",
+    "meta-llama/Llama-2-70b-hf": "Llama 2 70B",
+    "meta-llama/Llama-2-13b-chat-hf": "Llama 2 13B Instruct",
+    "EleutherAI/pythia-12b": "Pythia 12B"
     # "mistralai/Mixtral-8x22B-v0.1": "Mixtral 8x22b",
     # "EleutherAI/pythia-6.9b": "Pythia 6.9B",
     # "EleutherAI/pythia-12b": "Pythia 12B"
@@ -74,7 +79,7 @@ def main(df_fb, model_path):
         
             results.append({
                 'lp_start': lp_start,
-                'lp_end': lp_start,
+                'lp_end': lp_end,
                 'passage': row['passage'],
                 'start': row['start'],
                 'end': row['end'],
@@ -99,7 +104,7 @@ def main(df_fb, model_path):
 if __name__ == "__main__":
 
     ### Select model
-    selected_model = "meta-llama/Meta-Llama-3-70B-Instruct"
+    selected_model = "EleutherAI/pythia-12b"
     if selected_model not in MODELS:
         selected_model = None
         raise ValueError(f"Model {selected_model} not found in MODELS")
