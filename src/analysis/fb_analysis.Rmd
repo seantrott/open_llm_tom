@@ -93,7 +93,37 @@ df_all_models %>%
                                                     begin = 0.8, end = 0.15)) +
   facet_wrap(~knowledge_cue)
 
-### Visualization
+### Visualization by model family
+df_all_models %>%
+  group_by(passage, condition, knowledge_cue, model_family) %>%
+  summarise(m_lo = mean(log_odds)) %>%
+  ggplot(aes(x = m_lo,
+             y = model_family,
+             fill = condition)) +
+  geom_density_ridges2(aes(height = ..density..), 
+                       color=NA, 
+                       scale=.85, 
+                       # size=1, 
+                       alpha = .8,
+                       stat="density") +
+  labs(x = "Log Odds (Start vs. End)",
+       y = "",
+       fill = "") +
+  theme_minimal() +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  theme(
+    legend.position = "bottom"
+  ) + 
+  theme(axis.title = element_text(size=rel(1.2)),
+        axis.text = element_text(size = rel(1.2)),
+        legend.text = element_text(size = rel(1.2)),
+        legend.title = element_text(size = rel(1.2)),
+        strip.text.x = element_text(size = rel(1.2))) +
+    scale_fill_manual(values = viridisLite::viridis(2, option = "mako", 
+                                                    begin = 0.8, end = 0.15)) +
+  facet_wrap(~knowledge_cue)
+
+### Visualization altogether
 df_all_models %>%
   group_by(passage, condition, knowledge_cue) %>%
   summarise(m_lo = mean(log_odds)) %>%
@@ -252,7 +282,7 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(4, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -339,7 +369,7 @@ df_model_means = df_all_models %>%
   summarise(log_odds = mean(log_odds)) %>%
   mutate(model_shorthand = "All Models")
 
-df_merged = df_model_means %>%
+df_merged = df_merged %>%
   bind_rows(df_model_means)
 
 

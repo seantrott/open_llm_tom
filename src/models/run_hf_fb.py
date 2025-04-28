@@ -21,7 +21,9 @@ MODELS = {
     "meta-llama/Llama-2-13b-hf": "Llama 2 13B",
     "meta-llama/Llama-2-70b-hf": "Llama 2 70B",
     "meta-llama/Llama-2-13b-chat-hf": "Llama 2 13B Instruct",
-    "EleutherAI/pythia-12b": "Pythia 12B"
+    "EleutherAI/pythia-12b": "Pythia 12B",
+    "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
+    "Qwen/Qwen2.5-72B-Instruct": "Qwen 2.5 72B Instruct"
     # "mistralai/Mixtral-8x22B-v0.1": "Mixtral 8x22b",
     # "EleutherAI/pythia-6.9b": "Pythia 6.9B",
     # "EleutherAI/pythia-12b": "Pythia 12B"
@@ -104,7 +106,7 @@ def main(df_fb, model_path):
 if __name__ == "__main__":
 
     ### Select model
-    selected_model = "EleutherAI/pythia-12b"
+    selected_model = "Qwen/Qwen2.5-72B-Instruct"
     if selected_model not in MODELS:
         selected_model = None
         raise ValueError(f"Model {selected_model} not found in MODELS")
