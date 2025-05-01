@@ -15,18 +15,22 @@ MODELS = {
     "meta-llama/Meta-Llama-3-8B-Instruct": "Llama 3 8b instruct",
     "meta-llama/Meta-Llama-3-70B-Instruct": "Llama 3 70b instruct",
     "meta-llama/Llama-3.1-70B": "Llama 3.1 70b",
+    "meta-llama/Llama-3.1-70B-Instruct": "Llama 3.1 70B Instruct",
+    "meta-llama/Llama-3.1-8B-Instruct": "Llama 3.1 8B Instruct",
+    "meta-llama/Llama-3.1-8B": "Llama 3.1 8B",
     "mistralai/Mixtral-8x7B-v0.1": "Mixtral 8x7b",
     "mistralai/Mixtral-8x7B-Instruct-v0.1": "Mixtral 8x7B Instruct",
     "meta-llama/Llama-2-7b-hf": "Llama 2 7B",
     "meta-llama/Llama-2-13b-hf": "Llama 2 13B",
     "meta-llama/Llama-2-70b-hf": "Llama 2 70B",
+    "meta-llama/Llama-2-7b-chat-hf": "Llama 2 7B Instruct",
     "meta-llama/Llama-2-13b-chat-hf": "Llama 2 13B Instruct",
+    "meta-llama/Llama-2-70b-chat-hf": "Llama 2 70B Instruct",
     "EleutherAI/pythia-12b": "Pythia 12B",
+    "Qwen/Qwen2.5-7B-Instruct": "Qwen 2.5 7B Instruct",
     "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
-    "Qwen/Qwen2.5-72B-Instruct": "Qwen 2.5 72B Instruct"
-    # "mistralai/Mixtral-8x22B-v0.1": "Mixtral 8x22b",
-    # "EleutherAI/pythia-6.9b": "Pythia 6.9B",
-    # "EleutherAI/pythia-12b": "Pythia 12B"
+    "Qwen/Qwen2.5-72B-Instruct": "Qwen 2.5 72B Instruct",
+    "Qwen/Qwen2.5-7B": "Qwen 2.5 7B"
 }
 
 #### SETUP HF
@@ -106,7 +110,7 @@ def main(df_fb, model_path):
 if __name__ == "__main__":
 
     ### Select model
-    selected_model = "Qwen/Qwen2.5-72B-Instruct"
+    selected_model = "Qwen/Qwen2.5-7B"
     if selected_model not in MODELS:
         selected_model = None
         raise ValueError(f"Model {selected_model} not found in MODELS")

@@ -41,22 +41,40 @@ directory_path <- "../../data/processed/fb/"
 csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
 csv_list <- csv_files %>%
   map(~ read_csv(.))
-df_all_models <- bind_rows(csv_list)
+df_all_models <- bind_rows(csv_list) %>%
+  mutate(model_shorthand = str_to_title(model_shorthand))
 nrow(df_all_models)
 
 table(df_all_models$model_path)
 table(df_all_models$model_shorthand)
 
 
-### Load properties
-df_model_properties = read_csv("../../data/processed/model_properties.csv")
-table(df_model_properties$model_shorthand)
+
+### Load #params
+df_model_properties = read_csv("../../data/processed/model_properties.csv") %>% 
+  mutate(model_shorthand = str_to_title(model_shorthand))
+nrow(df_model_properties)
+
+### Load training data
+df_training_data = read_csv("../../data/processed/model_training_data.csv")%>% 
+  mutate(model_shorthand = str_to_title(model_shorthand))
+table(df_training_data$model_shorthand)
+
+### Join
+df_all_properties = df_training_data %>%
+  inner_join(df_model_properties)
+
+nrow(df_all_properties)
+
+
+#### Bind with FB data
+df_all_models = df_all_models %>%
+  inner_join(df_all_properties)
+nrow(df_all_models)
+table(df_all_models$model_shorthand)
 
 df_all_models = df_all_models %>%
-  inner_join(df_model_properties) %>%
   mutate(model_shorthand = str_to_title(model_shorthand))
-nrow(df_all_models)
-
 ```
 
 
@@ -204,7 +222,11 @@ results_by_model_path <- df_all_models %>%
   group_by(model_path) %>%
   group_split() %>%
   map_dfr(compare_models)
-results_by_model_path
+results_by_model_path %>%
+  arrange(LRT_stat)
+
+summary(results_by_model_path$LRT_stat)
+summary(results_by_model_path$condition_coef)
 ```
 
 
@@ -243,9 +265,10 @@ df_all_models = df_all_models %>%
 
 df_summ = df_all_models %>%
   group_by(model_path, model_shorthand, model_family,
-           num_params, base_instruct) %>%
+           num_params, num_training_tokens, base_instruct) %>%
   summarise(mean_accuracy = mean(correct))
-df_summ
+df_summ %>%
+  select(model_shorthand, mean_accuracy)
 mean(df_all_models$correct)
 
 
@@ -282,7 +305,32 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(6, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+df_summ %>%
+  ggplot(aes(x = num_training_tokens,
+             y = mean_accuracy,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  geom_hline(yintercept = .83,##TODO: Calculate from scratch
+             linetype = "dotted", color = "red",
+             size = 1.2, alpha = .8) + 
+  geom_hline(yintercept = .5, linetype = "dotted",
+             size = 1.2, alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label=model_shorthand), size=3) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "#Training Tokens",
+       y = "Accuracy",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(6, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -292,7 +340,7 @@ df_summ %>%
 ### How does model size predict accuracy?
 mod_full = glmer(data = df_all_models,
                  correct ~ condition + knowledge_cue +
-                   log10(num_params) + base_instruct + 
+                   log10(num_params) + log10(num_training_tokens) + base_instruct + 
                    (1 | start) + (1|model_family), 
                  family = binomial())
 summary(mod_full)
@@ -369,8 +417,8 @@ df_model_means = df_all_models %>%
   summarise(log_odds = mean(log_odds)) %>%
   mutate(model_shorthand = "All Models")
 
-df_merged = df_merged %>%
-  bind_rows(df_model_means)
+# df_merged = df_merged %>%
+#   bind_rows(df_model_means)
 
 
 df_wide <- df_merged %>%
@@ -387,6 +435,7 @@ ggcorrplot(cor_matrix,
            hc.order = TRUE,
            method = "square" 
           )
+
 
 
 ```

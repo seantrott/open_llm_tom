@@ -4,12 +4,19 @@ meta-llama/Meta-Llama-3-8B,Llama 3 8b,8030261248,Base,Llama 3
 meta-llama/Meta-Llama-3-8B-Instruct,Llama 3 8b instruct,8030261248,Instruct,Llama 3
 meta-llama/Meta-Llama-3-70B-Instruct,Llama 3 70b instruct,70553706496,Instruct,Llama 3
 meta-llama/Llama-3.1-70B,Llama 3.1 70b,70553706496,Base,Llama 3.1
+meta-llama/Llama-3.1-70B-Instruct,Llama 3.1 70B Instruct,70553706496,Instruct,Llama 3.1
+meta-llama/Llama-3.1-8B-Instruct,Llama 3.1 8B Instruct,8030261248,Instruct,Llama 3.1
+meta-llama/Llama-3.1-8B,Llama 3.1 8B,8030261248,Base,Llama 3.1
 mistralai/Mixtral-8x7B-v0.1,Mixtral 8x7b,46702792704,Base,Mixtral
 mistralai/Mixtral-8x7B-Instruct-v0.1,Mixtral 8x7B Instruct,46702792704,Instruct,Mixtral
 meta-llama/Llama-2-7b-hf,Llama 2 7B,6738417664,Base,Llama 2
 meta-llama/Llama-2-13b-hf,Llama 2 13B,13015866880,Base,Llama 2
 meta-llama/Llama-2-70b-hf,Llama 2 70B,68976653312,Base,Llama 2
+meta-llama/Llama-2-7b-chat-hf,Llama 2 7B Instruct,6738417664,Instruct,Llama 2
 meta-llama/Llama-2-13b-chat-hf,Llama 2 13B Instruct,13015866880,Instruct,Llama 2
+meta-llama/Llama-2-70b-chat-hf,Llama 2 70B Instruct,68976653312,Instruct,Llama 2
 EleutherAI/pythia-12b,Pythia 12B,11997067840,Base,Pythia
+Qwen/Qwen2.5-7B-Instruct,Qwen 2.5 7B Instruct,7615616512,Instruct,Qwen 2.5
 Qwen/Qwen2.5-14B-Instruct,Qwen 2.5 14B Instruct,14770033664,Instruct,Qwen 2.5
 Qwen/Qwen2.5-72B-Instruct,Qwen 2.5 72B Instruct,72706203648,Instruct,Qwen 2.5
+Qwen/Qwen2.5-7B,Qwen 2.5 7B,7615616512,Base,Qwen 2.5

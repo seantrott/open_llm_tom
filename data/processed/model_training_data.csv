@@ -1,0 +1,22 @@
+model_path,model_shorthand,num_training_tokens
+meta-llama/Meta-Llama-3-70B,Llama 3 70B,15000000000000
+meta-llama/Meta-Llama-3-8B,Llama 3 8B,15000000000000
+meta-llama/Meta-Llama-3-8B-Instruct,Llama 3 8B Instruct,15000000000000
+meta-llama/Meta-Llama-3-70B-Instruct,Llama 3 70B Instruct,15000000000000
+meta-llama/Llama-3.1-70B,Llama 3.1 70B,15000000000000
+meta-llama/Llama-3.1-70B-Instruct,Llama 3.1 70B Instruct,15000000000000
+meta-llama/Llama-3.1-8B-Instruct,Llama 3.1 8B Instruct,15000000000000
+meta-llama/Llama-3.1-8B,Llama 3.1 8B,15000000000000
+mistralai/Mixtral-8x7B-v0.1,Mixtral 8x7B,NA
+mistralai/Mixtral-8x7B-Instruct-v0.1,Mixtral 8x7B Instruct,NA
+meta-llama/Llama-2-7b-hf,Llama 2 7B,2000000000000
+meta-llama/Llama-2-13b-hf,Llama 2 13B,2000000000000
+meta-llama/Llama-2-70b-hf,Llama 2 70B,2000000000000
+meta-llama/Llama-2-7b-chat-hf,Llama 2 7B Instruct,2000000000000
+meta-llama/Llama-2-13b-chat-hf,Llama 2 13B Instruct,2000000000000
+meta-llama/Llama-2-70b-chat-hf,Llama 2 70B Instruct,2000000000000
+EleutherAI/pythia-12b,Pythia 12B,300000000000
+Qwen/Qwen2.5-7B-Instruct,Qwen 2.5 7B Instruct,18000000000000
+Qwen/Qwen2.5-14B-Instruct,Qwen 2.5 14B Instruct,18000000000000
+Qwen/Qwen2.5-72B-Instruct,Qwen 2.5 72B Instruct,18000000000000
+Qwen/Qwen2.5-7B,Qwen 2.5 7B,18000000000000
