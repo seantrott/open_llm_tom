@@ -930,7 +930,7 @@ summary(mod_full)
 df_human = read_csv("../../data/processed/human/human_fb_cleaned.csv") %>%
   select(participant_id, item_id, passage,
          is_correct, is_start, is_end,
-         reaction_time, condition, response, knowledge_cue)
+         reaction_time, condition, response, first_mention, recent_mention, knowledge_cue)
 ```
 
 ```
@@ -1400,6 +1400,132 @@ summary(glmer_model_comparisons$condition_coef)
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -4.300  -3.754  -3.662  -3.724  -3.607  -3.446
+```
+
+
+## Knowledge cue
+
+
+``` r
+mod_full = glmer(is_start ~ condition + knowledge_cue + 
+          first_mention + recent_mention +
+          (1 | item_id),
+        data = df_human,
+        family = binomial())
+mod_no_kc = glmer(is_start ~ condition + # knowledge_cue + 
+          first_mention + recent_mention +
+          (1 | item_id),
+        data = df_human,
+        family = binomial())
+
+anova(mod_full, mod_no_kc)
+```
+
+```
+## Data: df_human
+## Models:
+## mod_no_kc: is_start ~ condition + first_mention + recent_mention + (1 | item_id)
+## mod_full: is_start ~ condition + knowledge_cue + first_mention + recent_mention + (1 | item_id)
+##           npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+## mod_no_kc    5 548.97 571.07 -269.49    538.97                         
+## mod_full     6 534.97 561.48 -261.48    522.97 16.008  1  6.308e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+``` r
+summary(mod_full)
+```
+
+```
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial  ( logit )
+## Formula: 
+## is_start ~ condition + knowledge_cue + first_mention + recent_mention +  
+##     (1 | item_id)
+##    Data: df_human
+## 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##     535.0     561.5    -261.5     523.0       607 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.1452 -0.4658  0.2244  0.3590  2.5435 
+## 
+## Random effects:
+##  Groups  Name        Variance Std.Dev.
+##  item_id (Intercept) 0.1658   0.4072  
+## Number of obs: 613, groups:  item_id, 185
+## 
+## Fixed effects:
+##                       Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)            2.62696    0.32947   7.973 1.55e-15 ***
+## conditionTrue Belief  -3.58666    0.31800 -11.279  < 2e-16 ***
+## knowledge_cueImplicit -0.96220    0.24941  -3.858 0.000114 ***
+## first_mentionStart     0.01673    0.23516   0.071 0.943277    
+## recent_mentionStart    0.32950    0.23738   1.388 0.165115    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) cndtTB knwl_I frst_S
+## condtnTrBlf -0.691                     
+## knwldg_cImp -0.560  0.330              
+## frst_mntnSt -0.368  0.004 -0.029       
+## rcnt_mntnSt -0.299 -0.127  0.015  0.025
+```
+
+``` r
+### Comopare to parameter estimate for LLMs, using binary outcome
+df_all_models$is_start = df_all_models$log_odds > 0
+mod_all_lms_categorical = glmer(is_start ~ condition + knowledge_cue + 
+          first_mention + recent_mention +
+            (1 + condition | model_path) + (1 | start),
+        data = df_all_models,
+        family = binomial())
+summary(mod_all_lms_categorical)
+```
+
+```
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial  ( logit )
+## Formula: 
+## is_start ~ condition + knowledge_cue + first_mention + recent_mention +  
+##     (1 + condition | model_path) + (1 | start)
+##    Data: df_all_models
+## 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    3905.9    3962.2   -1943.9    3887.9      3831 
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -21.9288  -0.6278   0.0872   0.6563   3.2081 
+## 
+## Random effects:
+##  Groups     Name                 Variance Std.Dev. Corr 
+##  model_path (Intercept)          4.6353   2.1530        
+##             conditionTrue Belief 2.2946   1.5148   -0.96
+##  start      (Intercept)          0.9036   0.9506        
+## Number of obs: 3840, groups:  model_path, 20; start, 10
+## 
+## Fixed effects:
+##                       Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)            2.02234    0.58363   3.465  0.00053 ***
+## conditionTrue Belief  -1.59673    0.36107  -4.422 9.77e-06 ***
+## knowledge_cueImplicit -1.18007    0.08202 -14.388  < 2e-16 ***
+## first_mentionStart     0.02554    0.07967   0.321  0.74856    
+## recent_mentionStart   -0.07023    0.07968  -0.881  0.37814    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) cndtTB knwl_I frst_S
+## condtnTrBlf -0.802                     
+## knwldg_cImp -0.087  0.031              
+## frst_mntnSt -0.068 -0.001 -0.003       
+## rcnt_mntnSt -0.070  0.002  0.008  0.000
 ```
 
 

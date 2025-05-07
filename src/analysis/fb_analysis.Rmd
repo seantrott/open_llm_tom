@@ -359,7 +359,7 @@ summary(mod_full)
 df_human = read_csv("../../data/processed/human/human_fb_cleaned.csv") %>%
   select(participant_id, item_id, passage,
          is_correct, is_start, is_end,
-         reaction_time, condition, response, knowledge_cue)
+         reaction_time, condition, response, first_mention, recent_mention, knowledge_cue)
 mean(df_human$is_correct)
 
 df_by_item = df_human %>%
@@ -522,6 +522,37 @@ glmer_model_comparisons
 summary(glmer_model_comparisons$log_odds_coef)
 summary(glmer_model_comparisons$knowledge_cue_coef)
 summary(glmer_model_comparisons$condition_coef)
+
+```
+
+
+## Knowledge cue
+
+```{r}
+mod_full = glmer(is_start ~ condition + knowledge_cue + 
+          first_mention + recent_mention +
+          (1 | item_id),
+        data = df_human,
+        family = binomial())
+mod_no_kc = glmer(is_start ~ condition + # knowledge_cue + 
+          first_mention + recent_mention +
+          (1 | item_id),
+        data = df_human,
+        family = binomial())
+
+anova(mod_full, mod_no_kc)
+summary(mod_full)
+
+
+
+### Comopare to parameter estimate for LLMs, using binary outcome
+df_all_models$is_start = df_all_models$log_odds > 0
+mod_all_lms_categorical = glmer(is_start ~ condition + knowledge_cue + 
+          first_mention + recent_mention +
+            (1 + condition | model_path) + (1 | start),
+        data = df_all_models,
+        family = binomial())
+summary(mod_all_lms_categorical)
 
 ```
 
