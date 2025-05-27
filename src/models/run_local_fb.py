@@ -115,7 +115,7 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    model_path = "allenai/OLMo-2-1124-7B"
+    model_path = "allenai/OLMo-2-1124-7B-SFT"
     main(model_path)
 
 
