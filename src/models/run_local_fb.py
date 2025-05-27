@@ -13,7 +13,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 MODELS = {
     'allenai/OLMo-2-1124-7B': 'OLMo 2 7B',
     'allenai/OLMo-2-1124-7B-SFT': 'OLMo 2 7B SFT',
-    'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO'
+    'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO',
+    'allenai/OLMo-2-1124-7B-Instruct': 'OLMO 2 7B Instruct',
+    'allenai/OLMo-2-1124-13B': 'OLMO 2 13B'
 
     ### OLMO 7B revisions? step1000-tokens4B
 }
@@ -117,7 +119,7 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    model_path = "allenai/OLMo-2-1124-7B-DPO"
+    model_path = "allenai/OLMo-2-1124-13B"
     main(model_path)
 
 
