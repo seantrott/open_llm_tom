@@ -6,7 +6,7 @@ import transformers
 import torch
 
 from tqdm import tqdm
-from transformers import GPTNeoXForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 def next_seq_prob(model, tokenizer, seen, unseen):
     device = next(model.parameters()).device  # Detect model's device
@@ -49,8 +49,8 @@ df_fb.head(1)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
-mpath = "EleutherAI/pythia-14m"
-model = GPTNeoXForCausalLM.from_pretrained(
+mpath = "allenai/OLMo-2-1124-7B"
+model = AutoModelForCausalLM.from_pretrained(
     mpath,
     output_hidden_states = False,
     device_map="auto"  
