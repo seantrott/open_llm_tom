@@ -9,8 +9,7 @@ from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 def next_seq_prob(model, tokenizer, seen, unseen):
-    device = next(model.parameters()).device  # Detect model's device
-
+    device = next(model.parameters()).device  # get model's actual device
     input_ids = tokenizer.encode(seen, return_tensors="pt").to(device)
     unseen_ids = tokenizer.encode(unseen)
 
@@ -20,12 +19,12 @@ def next_seq_prob(model, tokenizer, seen, unseen):
             logits = model(input_ids).logits
 
         next_token_logits = logits[0, -1]
-        next_token_probs = torch.softmax(next_token_logits, 0)
+        next_token_probs = torch.softmax(next_token_logits, dim=0)
 
         prob = next_token_probs[unseen_id]
         log_probs.append(torch.log(prob))
 
-        # Add next token to input, ensuring device match
+        # Append next token to input
         next_token_tensor = torch.tensor([[unseen_id]], device=device)
         input_ids = torch.cat((input_ids, next_token_tensor), dim=1)
 
@@ -41,41 +40,32 @@ def next_seq_prob(model, tokenizer, seen, unseen):
 
 ### Load data
 df_fb = pd.read_csv("data/raw/fb.csv")
-df_fb.head(1)
-
-
 
 ### Load model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print("Using device:", device)
-
 mpath = "allenai/OLMo-2-1124-7B"
 model = AutoModelForCausalLM.from_pretrained(
     mpath,
-    output_hidden_states = False,
-    device_map="auto"  
-).to(device) 
-
+    device_map="auto"  # spread across available GPUs
+)
 tokenizer = AutoTokenizer.from_pretrained(mpath)
-
-
 
 ### Run model
 results = []
 
-with tqdm(total=df_fb.shape[0]) as pbar:    
-        
+with tqdm(total=len(df_fb)) as pbar:
     for index, row in df_fb.iterrows():
         passage = row['passage'].replace("[MASK].", "")
-        start_location = row['start'] if passage.endswith(" ") else " " + row['start']
-        end_location = row['end'] if passage.endswith(" ") else " " + row['end']
-    
+        sep = " " if not passage.endswith(" ") else ""
+        start_location = sep + row['start']
+        end_location = sep + row['end']
+
+
         start_prob = next_seq_prob(model, tokenizer, passage, start_location)
         end_prob = next_seq_prob(model, tokenizer, passage, end_location)
 
         if start_prob == 0 or end_prob == 0:
             continue
-    
+
         results.append({
             'start_prob': start_prob,
             'end_prob': end_prob,
@@ -85,10 +75,12 @@ with tqdm(total=df_fb.shape[0]) as pbar:
             'knowledge_cue': row['knowledge_cue'],
             'first_mention': row['first_mention'],
             'recent_mention': row['recent_mention'],
-            'log_odds': np.log2(start_prob/end_prob),
+            'log_odds': np.log2(start_prob / end_prob),
             'condition': row['condition']
         })
 
+
+        
         pbar.update(1)
 
 df_results = pd.DataFrame(results)
