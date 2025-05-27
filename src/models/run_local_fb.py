@@ -16,8 +16,10 @@ MODELS = {
     'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO',
     'allenai/OLMo-2-1124-7B-Instruct': 'OLMO 2 7B Instruct', ### TO DO
     'allenai/OLMo-2-1124-13B': 'OLMO 2 13B',
-    'allenai/OLMo-2-1124-13B-SFT': 'OLMO 2 13B SFT',
-    'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO'
+    'allenai/OLMo-2-1124-13B-SFT': 'OLMO 2 13B SFT', 
+    'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO', ### TO DO
+    'allenai/OLMo-2-1124-13B-Instruct': 'OLMO 2 13B Instruct', ### TO DO
+    ### 32B?
 
     ### OLMO 7B revisions? step1000-tokens4B
 }
@@ -121,7 +123,7 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    model_path = "allenai/OLMo-2-1124-13B-SFT"
+    model_path = "allenai/OLMo-2-1124-13B-DPO"
     main(model_path)
 
 
