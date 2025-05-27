@@ -20,6 +20,7 @@ MODELS = {
     'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO', 
     'allenai/OLMo-2-1124-13B-Instruct': 'OLMO 2 13B Instruct',
     'allenai/OLMo-2-0325-32B': 'OLMO 2 32B',
+    'allenai/OLMo-2-0325-32B-SFT': 'OLMO 2 32B SFT', ### TODO
     'allenai/OLMo-2-0325-32B-Instruct': 'OLMO 2 32B Instruct' ### TODO
 
     ### OLMO 7B revisions? step1000-tokens4B
@@ -124,7 +125,8 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    paths = ['allenai/OLMo-2-0325-32B']
+    paths = ['allenai/OLMo-2-0325-32B-SFT',
+    'allenai/OLMo-2-0325-32B-Instruct']
 
     for model_path in paths:
         # model_path = "allenai/OLMo-2-1124-13B-DPO"
