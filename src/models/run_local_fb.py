@@ -58,52 +58,52 @@ def main(model_path):
     print(filename)
     print(savepath)
 
-	### Load model
-	model = AutoModelForCausalLM.from_pretrained(
-	    model_path,
-	    device_map="auto"  # spread across available GPUs
-	)
-	tokenizer = AutoTokenizer.from_pretrained(model_path)
+    ### Load model
+    model = AutoModelForCausalLM.from_pretrained(
+        model_path,
+        device_map="auto"  # spread across available GPUs
+    )
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 
-	### Load data
-	df_fb = pd.read_csv("data/raw/fb.csv")
+    ### Load data
+    df_fb = pd.read_csv("data/raw/fb.csv")
 
 
-	### Run model
-	with tqdm(total=len(df_fb)) as pbar:
-	    for index, row in df_fb.iterrows():
-	        passage = row['passage'].replace("[MASK].", "")
-	        sep = " " if not passage.endswith(" ") else ""
-	        start_location = sep + row['start']
-	        end_location = sep + row['end']
+    ### Run model
+    with tqdm(total=len(df_fb)) as pbar:
+        for index, row in df_fb.iterrows():
+            passage = row['passage'].replace("[MASK].", "")
+            sep = " " if not passage.endswith(" ") else ""
+            start_location = sep + row['start']
+            end_location = sep + row['end']
 
 
-	        start_prob = next_seq_prob(model, tokenizer, passage, start_location)
-	        end_prob = next_seq_prob(model, tokenizer, passage, end_location)
+            start_prob = next_seq_prob(model, tokenizer, passage, start_location)
+            end_prob = next_seq_prob(model, tokenizer, passage, end_location)
 
-	        if start_prob == 0 or end_prob == 0:
-	            continue
+            if start_prob == 0 or end_prob == 0:
+                continue
 
-	        results.append({
-	            'start_prob': start_prob,
-	            'end_prob': end_prob,
-	            'passage': row['passage'],
-	            'start': row['start'],
-	            'end': row['end'],
-	            'knowledge_cue': row['knowledge_cue'],
-	            'first_mention': row['first_mention'],
-	            'recent_mention': row['recent_mention'],
-	            'log_odds': np.log2(start_prob / end_prob),
-	            'condition': row['condition']
-	        })
+            results.append({
+                'start_prob': start_prob,
+                'end_prob': end_prob,
+                'passage': row['passage'],
+                'start': row['start'],
+                'end': row['end'],
+                'knowledge_cue': row['knowledge_cue'],
+                'first_mention': row['first_mention'],
+                'recent_mention': row['recent_mention'],
+                'log_odds': np.log2(start_prob / end_prob),
+                'condition': row['condition']
+            })
 
 
-	        
-	        pbar.update(1)
+            
+            pbar.update(1)
 
-	### Create DataFRame
-	df_results = pd.DataFrame(results)
+    ### Create DataFRame
+    df_results = pd.DataFrame(results)
     df_results['model_path'] = model_path
     df_results['model_shorthand'] = MODELS[model_path]
 
