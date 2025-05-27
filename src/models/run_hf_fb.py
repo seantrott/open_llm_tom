@@ -30,7 +30,8 @@ MODELS = {
     "Qwen/Qwen2.5-7B-Instruct": "Qwen 2.5 7B Instruct",
     "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
     "Qwen/Qwen2.5-72B-Instruct": "Qwen 2.5 72B Instruct",
-    "Qwen/Qwen2.5-7B": "Qwen 2.5 7B"
+    "Qwen/Qwen2.5-7B": "Qwen 2.5 7B",
+    'allenai/OLMo-2-1124-7B': 'OLMo 2 7B'
 }
 
 #### SETUP HF

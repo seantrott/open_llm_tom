@@ -11,7 +11,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 MODELS = {
-    'allenai/OLMo-2-1124-7B': 'OLMo 2 7B'
+    'allenai/OLMo-2-1124-7B': 'OLMo 2 7B',
+    'allenai/OLMo-2-1124-7B-SFT': 'OLMo 2 7B SFT',
+    'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO'
 }
 
 
