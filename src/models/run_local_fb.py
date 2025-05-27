@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import transformers
 import torch
+import os
 
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
