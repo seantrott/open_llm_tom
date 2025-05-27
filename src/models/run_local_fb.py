@@ -19,8 +19,8 @@ MODELS = {
     'allenai/OLMo-2-1124-13B-SFT': 'OLMO 2 13B SFT', 
     'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO', 
     'allenai/OLMo-2-1124-13B-Instruct': 'OLMO 2 13B Instruct',
-    ### 32B?
-    'allenai/OLMo-2-0325-32B': 'OLMO 2 32B'
+    'allenai/OLMo-2-0325-32B': 'OLMO 2 32B',
+    'allenai/OLMo-2-0325-32B-Instruct': 'OLMO 2 32B Instruct' ### TODO
 
     ### OLMO 7B revisions? step1000-tokens4B
 }
