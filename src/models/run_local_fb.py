@@ -92,3 +92,18 @@ with tqdm(total=df_fb.shape[0]) as pbar:
         pbar.update(1)
 
 df_results = pd.DataFrame(results)
+
+### Quick check
+from scipy.stats import ttest_ind
+# Separate into two groups
+group1 = df_results[df_results['condition'] == 'True Belief']['log_odds']
+group2 = df_results[df_results['condition'] == 'False Belief']['log_odds']
+
+# Run independent t-test (assumes unequal variance by default)
+t_stat, p_val = ttest_ind(group1, group2, equal_var=False)
+
+print(f"T-statistic: {t_stat:.3f}")
+print(f"P-value: {p_val:.3f}")
+
+print(df_results.groupby("condition").mean("log_odds"))
+
