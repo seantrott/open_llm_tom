@@ -123,7 +123,12 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    model_path = "allenai/OLMo-2-1124-13B-DPO"
-    main(model_path)
+    paths = ['allenai/OLMo-2-1124-13B-DPO',
+             'allenai/OLMo-2-1124-13B-Instruct',
+             'allenai/OLMo-2-1124-7B-Instruct']
+
+    for model_path in paths:
+        # model_path = "allenai/OLMo-2-1124-13B-DPO"
+        main(model_path)
 
 
