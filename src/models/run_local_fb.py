@@ -70,7 +70,7 @@ def main(model_path):
     ### Load data
     df_fb = pd.read_csv("data/raw/fb.csv")
 
-
+    results = []
     ### Run model
     with tqdm(total=len(df_fb)) as pbar:
         for index, row in df_fb.iterrows():
