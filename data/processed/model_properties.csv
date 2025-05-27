@@ -20,4 +20,14 @@ Qwen/Qwen2.5-7B-Instruct,Qwen 2.5 7B Instruct,7615616512,Instruct,Qwen 2.5
 Qwen/Qwen2.5-14B-Instruct,Qwen 2.5 14B Instruct,14770033664,Instruct,Qwen 2.5
 Qwen/Qwen2.5-72B-Instruct,Qwen 2.5 72B Instruct,72706203648,Instruct,Qwen 2.5
 Qwen/Qwen2.5-7B,Qwen 2.5 7B,7615616512,Base,Qwen 2.5
-allenai/OLMo-2-1124-7B,OLMo 2 7B,7298617344,Base,OLMo
+allenai/OLMo-2-1124-7B,OLMo 2 7B,7298617344,Base,Olmo
+allenai/OLMo-2-1124-7B-SFT,OLMo 2 7B SFT,7298617344,Base,Olmo
+allenai/OLMo-2-1124-7B-DPO,OLMo 2 7B DPO,7298617344,Instruct,Olmo
+allenai/OLMo-2-1124-7B-Instruct,OLMO 2 7B Instruct,7298617344,Instruct,Olmo
+allenai/OLMo-2-1124-13B,OLMO 2 13B,13716198400,Base,Olmo
+allenai/OLMo-2-1124-13B-SFT,OLMO 2 13B SFT,13716198400,Base,Olmo
+allenai/OLMo-2-1124-13B-DPO,OLMo 2 13B DPO,13716198400,Instruct,Olmo
+allenai/OLMo-2-1124-13B-Instruct,OLMO 2 13B Instruct,13716198400,Instruct,Olmo
+allenai/OLMo-2-0325-32B,OLMO 2 32B,32234279936,Base,Olmo
+allenai/OLMo-2-0325-32B-SFT,OLMO 2 32B SFT,32234279936,Base,Olmo
+allenai/OLMo-2-0325-32B-Instruct,OLMO 2 32B Instruct,32234279936,Instruct,Olmo

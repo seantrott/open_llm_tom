@@ -259,7 +259,6 @@ anova(mod_full, mod_reduced)
 
 ## Accuracy metric
 
-**TODO**: Add in features like number of training tokens.
 
 ```{r}
 df_all_models = df_all_models %>%
@@ -315,7 +314,7 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(6, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -343,7 +342,7 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(6, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -478,7 +477,7 @@ ggcorrplot(cor_matrix,
            method = "square" 
           )
 
-
+cor_matrix["Human",]
 
 ```
 
@@ -502,7 +501,6 @@ table(df_all_models_with_human$model_path)
 
 Now, fit a baselines model for each LLM.
 
-**TODO**: Also get p-value for log-odds coefficient?
 
 ```{r}
 fit_compare_glmer_by_model <- function(df) {
@@ -564,6 +562,100 @@ glmer_model_comparisons
 summary(glmer_model_comparisons$log_odds_coef)
 summary(glmer_model_comparisons$knowledge_cue_coef)
 summary(glmer_model_comparisons$condition_coef)
+summary(glmer_model_comparisons$LRT_stat)
+
+```
+
+## PPP Analysis
+
+```{r}
+fit_ppp_by_model <- function(df) {
+
+  # Fit full model
+  mod_full <- tryCatch(
+    glmer(is_start ~ log_odds+
+            (1 | item_id),
+          data = df,
+          family = binomial()),
+    error = function(e) NULL
+  )
+
+  # Extract coefficient for log_odds
+  log_odds_coef <- tryCatch({
+    fixef(mod_full)["log_odds"]
+  }, error = function(e) NA)
+
+  tibble(
+    model_shorthand = unique(df$model_shorthand),
+    AIC = AIC(mod_full),
+    log_odds_coef = fixef(mod_full)["log_odds"]
+  )
+}
+
+# Apply across model_shorthand groups
+ppp_models <- df_all_models_with_human %>%
+  group_by(model_shorthand) %>%
+  group_split() %>%
+  map_dfr(fit_ppp_by_model) %>%
+  inner_join(df_model_properties)
+
+### Rescale AIC
+ppp_models = ppp_models %>%
+  mutate(delta_AIC = AIC - min(AIC),
+         weight = exp(-0.5 * delta_AIC),
+         model_prob = weight / sum(weight))
+
+
+### Add back to original data
+ppp_with_accuracy = ppp_models %>%
+  select(model_shorthand, model_prob, delta_AIC) %>%
+  inner_join(df_summ)
+
+ppp_with_accuracy %>%
+  summarise(
+    weighted_accuracy = sum(mean_accuracy * model_prob),
+    mean_accuracy = mean(mean_accuracy)
+  )
+
+
+ppp_with_accuracy %>%
+  ggplot(aes(x = num_training_tokens,
+             y = delta_AIC,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "#Training Tokens",
+       y = "Delta AIC",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+
+ppp_with_accuracy %>%
+  ggplot(aes(x = num_params,
+             y = delta_AIC,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "#Parameters",
+       y = "Delta AIC",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
 
 ```
 
@@ -606,6 +698,35 @@ group_coefs <- tibble(
   knowledge_cue_coef = c(coef_human["knowledge_cueImplicit"], coef_llms["knowledge_cueImplicit"]),
   condition_coef = c(coef_human["conditionTrue Belief"], coef_llms["conditionTrue Belief"])
 )
+
+## Each model on its own
+run_models_for_comparison <- function(df) {
+
+  mod_full = glmer(is_start ~ condition + knowledge_cue + 
+            first_mention + recent_mention +
+            (1 + condition | start),
+          data = df,
+          family = binomial(),
+          control = glmerControl(optimizer = "bobyqa"))
+  
+  # Extract coefficients
+  coefs <- fixef(mod_full)
+  cond_coef <- coefs[grep("^condition", names(coefs))]
+  cue_coef <- coefs[grep("^knowledge_cue", names(coefs))]
+
+  tibble(
+    model_path = unique(df$model_path),
+    condition_coef = cond_coef,
+    knowledge_cue_coef = cue_coef
+  )
+}
+
+# Apply to each model_path
+results_by_model_path <- df_all_models %>%
+  group_by(model_path) %>%
+  group_split() %>%
+  map_dfr(run_models_for_comparison)
+
 
 all_coefs = results_by_model_path %>%
   select(model_path, knowledge_cue_coef, condition_coef) %>%
@@ -654,6 +775,9 @@ all_coefs_long %>%
                                                     begin = 0.8, end = 0.15))
 
 
+all_coefs_long %>%
+  arrange(Estimate) %>%
+  head(3)
 ```
 
 

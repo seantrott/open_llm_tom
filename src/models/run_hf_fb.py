@@ -31,7 +31,19 @@ MODELS = {
     "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
     "Qwen/Qwen2.5-72B-Instruct": "Qwen 2.5 72B Instruct",
     "Qwen/Qwen2.5-7B": "Qwen 2.5 7B",
-    'allenai/OLMo-2-1124-7B': 'OLMo 2 7B'
+
+    ### LOCAL MODELS
+    'allenai/OLMo-2-1124-7B': 'OLMo 2 7B',
+    'allenai/OLMo-2-1124-7B-SFT': 'OLMo 2 7B SFT',
+    'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO',
+    'allenai/OLMo-2-1124-7B-Instruct': 'OLMO 2 7B Instruct', 
+    'allenai/OLMo-2-1124-13B': 'OLMO 2 13B',
+    'allenai/OLMo-2-1124-13B-SFT': 'OLMO 2 13B SFT', 
+    'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO', 
+    'allenai/OLMo-2-1124-13B-Instruct': 'OLMO 2 13B Instruct',
+    'allenai/OLMo-2-0325-32B': 'OLMO 2 32B',
+    'allenai/OLMo-2-0325-32B-SFT': 'OLMO 2 32B SFT', ### TODO
+    'allenai/OLMo-2-0325-32B-Instruct': 'OLMO 2 32B Instruct' ### TODO
 }
 
 #### SETUP HF
