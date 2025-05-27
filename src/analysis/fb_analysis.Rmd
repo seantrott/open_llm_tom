@@ -201,19 +201,18 @@ compare_models <- function(df) {
   lrt_stat <- anova_result$Chisq[2]
   p_val <- anova_result$`Pr(>Chisq)`[2]
   
-  # Extract condition coefficient from full model (assuming it's a factor and second level is the contrast)
-  cond_coef <- tryCatch({
-    coefs <- fixef(mod_full)
-    cond_name <- grep("^condition", names(coefs), value = TRUE)
-    coefs[cond_name]
-  }, error = function(e) NA)
+  # Extract coefficients
+  coefs <- tryCatch(fixef(mod_full), error = function(e) return(rep(NA, 2)))
+  cond_coef <- coefs[grep("^condition", names(coefs))]
+  cue_coef <- coefs[grep("^knowledge_cue", names(coefs))]
 
   tibble(
     model_path = unique(df$model_path),
     delta_AIC = delta_aic,
     LRT_stat = lrt_stat,
     p_value = p_val,
-    condition_coef = cond_coef
+    condition_coef = cond_coef,
+    knowledge_cue_coef = cue_coef
   )
 }
 
@@ -227,6 +226,13 @@ results_by_model_path %>%
 
 summary(results_by_model_path$LRT_stat)
 summary(results_by_model_path$condition_coef)
+summary(results_by_model_path$knowledge_cue_coef)
+
+
+results_by_model_path$p_adj = p.adjust(results_by_model_path$p_value, method = "holm")
+results_by_model_path = results_by_model_path %>%
+  mutate(sig = p_adj < .05)
+mean(results_by_model_path$sig)
 ```
 
 
@@ -295,6 +301,9 @@ df_summ %>%
   geom_hline(yintercept = .83,##TODO: Calculate from scratch
              linetype = "dotted", color = "red",
              size = 1.2, alpha = .8) + 
+    geom_hline(yintercept = .9,##TODO: Calculate from scratch
+             linetype = "dotted", color = "blue",
+             size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
   scale_x_log10() +
@@ -322,6 +331,9 @@ df_summ %>%
              size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
+    geom_hline(yintercept = .9,##TODO: Calculate from scratch
+             linetype = "dotted", color = "blue",
+             size = 1.2, alpha = .8) + 
   scale_x_log10() +
   geom_text_repel(aes(label=model_shorthand), size=3) +
   scale_y_continuous(limits = c(0, 1)) +
@@ -339,7 +351,7 @@ df_summ %>%
 
 ### How does model size predict accuracy?
 mod_full = glmer(data = df_all_models,
-                 correct ~ condition + knowledge_cue +
+                 correct ~ condition + knowledge_cue  +
                    log10(num_params) + log10(num_training_tokens) + base_instruct + 
                    (1 | start) + (1|model_family), 
                  family = binomial())
@@ -347,6 +359,27 @@ summary(mod_full)
 
 
 
+```
+
+## Item-wise analysis
+
+```{r}
+df_item_accuracy = df_all_models %>%
+  group_by(start) %>%
+  summarise(mean_accuracy = mean(correct)) %>%
+  arrange(mean_accuracy)
+
+df_item_accuracy %>%
+  ggplot(aes(x = mean_accuracy)) +
+  geom_histogram(alpha = .5) +
+  labs(x = "Item-wise accuracy",
+       y = "Count",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
 ```
 
 
@@ -367,7 +400,15 @@ df_by_item = df_human %>%
   summarise(p_start = mean(is_start) + .0001,
             p_end = mean(is_end) + .0001) %>%
   mutate(log_odds = log((p_start / p_end))) %>%
-  mutate(model_shorthand = "Human")
+  mutate(model_shorthand = "Human") %>%
+  mutate(correct = case_when(
+    condition == "False Belief" & log_odds > 0 ~ TRUE,
+    condition == "True Belief" & log_odds <= 0 ~ TRUE,
+    TRUE ~ FALSE  # all other cases are incorrect
+  ))
+### Mean using log-odds measure forh umans
+mean(df_by_item$correct)
+
 
 
 ### Merge
@@ -375,7 +416,7 @@ df_merged = df_all_models %>%
   bind_rows(df_by_item)
 ```
 
-## Recreate model-wise distributiosn
+## Recreate model-wise distributions
 
 ```{r}
 ### Visualization
@@ -553,6 +594,64 @@ mod_all_lms_categorical = glmer(is_start ~ condition + knowledge_cue +
         data = df_all_models,
         family = binomial())
 summary(mod_all_lms_categorical)
+
+
+coef_human <- fixef(mod_full)
+coef_llms <- fixef(mod_all_lms_categorical)
+
+# Create aligned dataframe
+group_coefs <- tibble(
+  model_path = c("Human", "LLMs"),
+  knowledge_cue_coef = c(coef_human["knowledge_cueImplicit"], coef_llms["knowledge_cueImplicit"]),
+  condition_coef = c(coef_human["conditionTrue Belief"], coef_llms["conditionTrue Belief"])
+)
+
+all_coefs = results_by_model_path %>%
+  select(model_path, knowledge_cue_coef, condition_coef) %>%
+  bind_rows(group_coefs)
+
+
+
+all_coefs_long = all_coefs %>%
+  pivot_longer(cols = c(knowledge_cue_coef, condition_coef),
+              names_to = "Term",
+               values_to = "Estimate") %>%
+  mutate(Term = fct_recode(Term, 
+                           "Knowledge Cue (Implicit)" = "knowledge_cue_coef",
+                           "Condition (True Belief)" = "condition_coef"))
+
+
+reference_coefs <- all_coefs_long %>%
+  filter(model_path %in% c("Human", "LLMs"))
+
+all_coefs_long %>%
+  filter(model_path != "Human") %>%
+  filter(model_path != "LLMs") %>%
+  ggplot(aes(x = Term,
+             y = Estimate)) +
+  geom_jitter(width = .05, alpha = .3) +
+  geom_point(data = reference_coefs,
+             aes(x = Term, y = Estimate, color = model_path),
+             size = 6,
+             alpha = .8,
+             shape = 18, 
+             inherit.aes = FALSE) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, linetype = "dotted") +
+  theme(
+    legend.position = "bottom"
+  ) + 
+  labs(x = "",
+       color = "") + 
+  coord_flip() +
+  theme(axis.title = element_text(size=rel(1.2)),
+        axis.text = element_text(size = rel(1.2)),
+        legend.text = element_text(size = rel(1.2)),
+        legend.title = element_text(size = rel(1.2)),
+        strip.text.x = element_text(size = rel(1.2))) +
+    scale_color_manual(values = viridisLite::viridis(2, option = "mako", 
+                                                    begin = 0.8, end = 0.15))
+
 
 ```
 
