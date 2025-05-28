@@ -477,7 +477,7 @@ ggcorrplot(cor_matrix,
            method = "square" 
           )
 
-cor_matrix["Human",]
+sort(cor_matrix["Human",])
 
 ```
 
