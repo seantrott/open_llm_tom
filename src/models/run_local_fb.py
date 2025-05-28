@@ -29,7 +29,7 @@ MODELS = {
     'allenai/OLMo-2-0425-1B': 'OLMO 2 1B',
     'allenai/OLMo-2-0425-1B-SFT': 'OLMO 2 1B SFT',
     'allenai/OLMo-2-0425-1B-DPO': 'OLMO 2 1B DPO',
-    'allenai/OLMo-2-0425-1B-Instruct': 'OLMO 2 1B Instruct'
+    'allenai/OLMo-2-0425-1B-Instruct': 'OLMO 2 1B Instruct',
     ### OLMO 7B revisions? step1000-tokens4B
 
     ### Pythia (To run locally)
