@@ -30,10 +30,9 @@ MODELS = {
     'allenai/OLMo-2-0425-1B-SFT': 'OLMO 2 1B SFT',
     'allenai/OLMo-2-0425-1B-DPO': 'OLMO 2 1B DPO',
     'allenai/OLMo-2-0425-1B-Instruct': 'OLMO 2 1B Instruct',
-    ### OLMO 7B revisions? step1000-tokens4B
 
     ### Pythia (To run locally)
-    "EleutherAI/pythia-12b": "Pythia 12B", ### TODO
+    "EleutherAI/pythia-12b": "Pythia 12B", 
     "EleutherAI/pythia-6.9b": "Pythia 6.9B",
     "EleutherAI/pythia-2.8b": "Pythia 2.8B",
     "EleutherAI/pythia-1.4b": "Pythia 1.4B",
@@ -42,6 +41,22 @@ MODELS = {
     "EleutherAI/pythia-160m": "Pythia 160m",
     "EleutherAI/pythia-70m": "Pythia 70m",
     "EleutherAI/pythia-14m": "Pythia 14m",
+
+    ### Qwen (TO DO)
+    "Qwen/Qwen2.5-0.5B": "Qwen 2.5 0.5B",
+    "Qwen/Qwen2.5-0.5B-Instruct": "Qwen 2.5 0.5B Instruct",
+    "Qwen/Qwen2.5-1.5B": "Qwen 2.5 1.5B",
+    "Qwen/Qwen2.5-1.5B-Instruct": "Qwen 2.5 1.5 Instruct",
+    "Qwen/Qwen2.5-3B": "Qwen 2.5 3B",
+    "Qwen/Qwen2.5-3B-Instruct": "Qwen 2.5 3B Instruct",
+    "Qwen/Qwen2.5-7B": "Qwen 2.5 7B",
+    "Qwen/Qwen2.5-7B-Instruct": "Qwen 2.5 7B Instruct",
+    "Qwen/Qwen2.5-14B": "Qwen 2.5 14B",
+    "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
+    "Qwen/Qwen2.5-32B": "Qwen 2.5 32B",
+    "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct"
+
+    ### ALso run: smaller Llama 3, llama 3.1, llama 2, Gemma
 }
 
 
@@ -143,10 +158,12 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    paths = ['EleutherAI/pythia-12b', 'EleutherAI/pythia-6.9b', 'EleutherAI/pythia-2.8b', 
-    'EleutherAI/pythia-1.4b', 'EleutherAI/pythia-1b', 
-    'EleutherAI/pythia-410m', 'EleutherAI/pythia-160m', 
-    'EleutherAI/pythia-70m', 'EleutherAI/pythia-14m']
+    paths = ['Qwen/Qwen2.5-0.5B', 'Qwen/Qwen2.5-0.5B-Instruct', 
+    'Qwen/Qwen2.5-1.5B', 'Qwen/Qwen2.5-1.5B-Instruct', 
+    'Qwen/Qwen2.5-3B', 'Qwen/Qwen2.5-3B-Instruct', 
+    'Qwen/Qwen2.5-7B', 'Qwen/Qwen2.5-7B-Instruct', 
+    'Qwen/Qwen2.5-14B', 'Qwen/Qwen2.5-14B-Instruct', 
+    'Qwen/Qwen2.5-32B', 'Qwen/Qwen2.5-32B-Instruct']
 
     for model_path in paths:
         # model_path = "allenai/OLMo-2-1124-13B-DPO"

@@ -33,6 +33,7 @@ MODELS = {
     "Qwen/Qwen2.5-7B": "Qwen 2.5 7B",
 
     ### LOCAL MODELS
+    ### OLMO
     'allenai/OLMo-2-1124-7B': 'OLMo 2 7B',
     'allenai/OLMo-2-1124-7B-SFT': 'OLMo 2 7B SFT',
     'allenai/OLMo-2-1124-7B-DPO': 'OLMo 2 7B DPO',
@@ -48,7 +49,19 @@ MODELS = {
     'allenai/OLMo-2-0425-1B': 'OLMO 2 1B',
     'allenai/OLMo-2-0425-1B-SFT': 'OLMO 2 1B SFT',
     'allenai/OLMo-2-0425-1B-DPO': 'OLMO 2 1B DPO',
-    'allenai/OLMo-2-0425-1B-Instruct': 'OLMO 2 1B Instruct'
+    'allenai/OLMo-2-0425-1B-Instruct': 'OLMO 2 1B Instruct',
+
+
+    ## Pythia 
+    "EleutherAI/pythia-12b": "Pythia 12B", ### TODO
+    "EleutherAI/pythia-6.9b": "Pythia 6.9B",
+    "EleutherAI/pythia-2.8b": "Pythia 2.8B",
+    "EleutherAI/pythia-1.4b": "Pythia 1.4B",
+    "EleutherAI/pythia-1b": "Pythia 1B",
+    "EleutherAI/pythia-410m": "Pythia 410m",
+    "EleutherAI/pythia-160m": "Pythia 160m",
+    "EleutherAI/pythia-70m": "Pythia 70m",
+    "EleutherAI/pythia-14m": "Pythia 14m",
 }
 
 #### SETUP HF

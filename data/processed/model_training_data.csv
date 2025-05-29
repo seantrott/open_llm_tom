@@ -36,3 +36,11 @@ allenai/OLMo-2-0425-1B,OLMO 2 1B,4000000000000
 allenai/OLMo-2-0425-1B-SFT,OLMO 2 1B SFT,4000000000000
 allenai/OLMo-2-0425-1B-DPO,OLMO 2 1B DPO,4000000000000
 allenai/OLMo-2-0425-1B-Instruct,OLMO 2 1B Instruct,4000000000000
+EleutherAI/pythia-6.9b,Pythia 6.9B,300000000000
+EleutherAI/pythia-2.8b,Pythia 2.8B,300000000000
+EleutherAI/pythia-1.4b,Pythia 1.4B,300000000000
+EleutherAI/pythia-1b,Pythia 1B,300000000000
+EleutherAI/pythia-410m,Pythia 410m,300000000000
+EleutherAI/pythia-160m,Pythia 160m,300000000000
+EleutherAI/pythia-70m,Pythia 70m,300000000000
+EleutherAI/pythia-14m,Pythia 14m,300000000000

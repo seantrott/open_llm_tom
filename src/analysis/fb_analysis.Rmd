@@ -76,6 +76,10 @@ table(df_all_models$model_shorthand)
 df_all_models = df_all_models %>%
   mutate(model_shorthand = str_to_title(model_shorthand))
 
+
+length(unique(df_all_models$model_shorthand))
+length(unique(df_all_models$model_family))
+
 ```
 
 
