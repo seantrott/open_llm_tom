@@ -1,7 +1,7 @@
 model_path,model_shorthand,num_params,base_instruct,model_family
 meta-llama/Meta-Llama-3-70B,Llama 3 70b,70553706496,Base,Llama 3
-meta-llama/Meta-Llama-3-8B,Llama 3 8b,8030261248,Base,Llama 3
-meta-llama/Meta-Llama-3-8B-Instruct,Llama 3 8b instruct,8030261248,Instruct,Llama 3
+meta-llama/Meta-Llama-3-8B,LLama 3.1 8B,8030261248,Base,Llama 3.1
+meta-llama/Meta-Llama-3-8B-Instruct,LLama 3.1 8B Instruct,8030261248,Instruct,Llama 3.1
 meta-llama/Meta-Llama-3-70B-Instruct,Llama 3 70b instruct,70553706496,Instruct,Llama 3
 meta-llama/Llama-3.1-70B,Llama 3.1 70b,70553706496,Base,Llama 3.1
 meta-llama/Llama-3.1-70B-Instruct,Llama 3.1 70B Instruct,70553706496,Instruct,Llama 3.1
@@ -53,3 +53,7 @@ Qwen/Qwen2.5-3B-Instruct,Qwen 2.5 3B Instruct,3085938688,Instruct,Qwen 2.5
 Qwen/Qwen2.5-14B,Qwen 2.5 14B,14770033664,Base,Qwen 2.5
 Qwen/Qwen2.5-32B,Qwen 2.5 32B,32763876352,Base,Qwen 2.5
 Qwen/Qwen2.5-32B-Instruct,Qwen 2.5 32B Instruct,32763876352,Instruct,Qwen 2.5
+google/gemma-2b,Gemma 2 2B,2506172416,Base,Gemma
+google/gemma-2b-it,Gemma 2 2B Instruct,2506172416,Instruct,Gemma
+google/gemma-7b,Gemma 2 7B,8537680896,Base,Gemma
+google/gemma-7b-it,Gemma 2 7B Instruct,8537680896,Instruct,Gemma

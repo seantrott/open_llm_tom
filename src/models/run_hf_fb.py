@@ -77,7 +77,23 @@ MODELS = {
     "Qwen/Qwen2.5-14B": "Qwen 2.5 14B",
     "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
     "Qwen/Qwen2.5-32B": "Qwen 2.5 32B",
-    "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct"
+    "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct",
+
+    ### Gemma
+    "google/gemma-2b": "Gemma 2 2B",
+    "google/gemma-2b-it": "Gemma 2 2B Instruct",
+    "google/gemma-7b": "Gemma 2 7B",
+    "google/gemma-7b-it": "Gemma 2 7B Instruct",
+
+
+    ### LLama 3 (needs authentication)
+    "meta-llama/Meta-Llama-3-8B": "LLaMA 3 8B",
+    "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3 8B Instruct",
+
+    ### Llama 3.1 (needs authentication)
+    # "meta-llama/Meta-Llama-3-8B": "LLaMA 3 8B",
+    # "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3 8B Instruct",
+
 }
 
 #### SETUP HF

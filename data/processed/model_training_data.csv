@@ -53,3 +53,7 @@ Qwen/Qwen2.5-3B-Instruct,Qwen 2.5 3B Instruct,18000000000000,estimate
 Qwen/Qwen2.5-14B,Qwen 2.5 14B,18000000000000,estimate
 Qwen/Qwen2.5-32B,Qwen 2.5 32B,18000000000000,estimate
 Qwen/Qwen2.5-32B-Instruct,Qwen 2.5 32B Instruct,18000000000000,estimate
+google/gemma-2b,Gemma 2 2B,6000000000000,model card source
+google/gemma-2b-it,Gemma 2 2B Instruct,6000000000000,model card source
+google/gemma-7b,Gemma 2 7B,6000000000000,model card source
+google/gemma-7b-it,Gemma 2 7B Instruct,6000000000000,model card source
