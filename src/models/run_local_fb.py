@@ -66,15 +66,16 @@ MODELS = {
     ### LLama 3 (needs authentication)
     "meta-llama/Meta-Llama-3-8B": "LLaMA 3 8B",
     "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3 8B Instruct",
-    "meta-llama/Meta-Llama-3-32B": "LLaMA 3 32B",
-    "meta-llama/Meta-Llama-3-32B-Instruct": "LLaMA 3 32B Instruct",
+    # "meta-llama/Meta-Llama-3-32B": "LLaMA 3 32B",
+    # "meta-llama/Meta-Llama-3-32B-Instruct": "LLaMA 3 32B Instruct",
 
     ### Llama 3.1 (needs authentication)
     "meta-llama/Meta-Llama-3-8B": "LLaMA 3.1 8B",
     "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3.1 8B Instruct",
-    "meta-llama/Meta-Llama-3-32B": "LLaMA 3.1 32B",
-    "meta-llama/Meta-Llama-3-32B-Instruct": "LLaMA 3.1 32B Instruct",
+    # "meta-llama/Meta-Llama-3-32B": "LLaMA 3.1 32B",
+    # "meta-llama/Meta-Llama-3-32B-Instruct": "LLaMA 3.1 32B Instruct",
 
+    ### Run 32B once I clear up space
 }
 
 
