@@ -234,6 +234,7 @@ summary(results_by_model_path$condition_coef)
 summary(results_by_model_path$knowledge_cue_coef)
 
 
+### TODO: Should we adjust? What hypothesis are we testing?
 results_by_model_path$p_adj = p.adjust(results_by_model_path$p_value, method = "holm")
 results_by_model_path = results_by_model_path %>%
   mutate(sig = p_adj < .05)
@@ -482,6 +483,36 @@ ggcorrplot(cor_matrix,
           )
 
 sort(cor_matrix["Human",])
+
+
+### MDS
+# Convert correlation matrix to a dissimilarity matrix
+dissimilarity <- as.dist(sqrt(1 - cor_matrix))
+
+# Perform classical MDS
+mds_result <- cmdscale(dissimilarity, k = 2)  # k = number of dimensions, usually 2 for plotting
+
+# Put into a data frame for plotting
+mds_df <- as.data.frame(mds_result)
+colnames(mds_df) <- c("Dim1", "Dim2")
+mds_df$model_shorthand <- rownames(mds_df)
+
+mds_df = mds_df %>%
+  inner_join(df_summ)
+
+ggplot(mds_df, aes(Dim1, Dim2, 
+                   color = model_family,
+                   size = mean_accuracy)) +
+  geom_point(alpha = .5) +
+  theme_bw() +
+  labs(x = "MDS 1",
+       y = "MDS 2",
+       color = "") +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") +
+  scale_color_manual(values = viridisLite::viridis(4, option = "mako", 
+                                                   begin = 0.8, end = 0.15)) 
+
 
 ```
 

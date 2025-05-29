@@ -56,6 +56,15 @@ MODELS = {
     "Qwen/Qwen2.5-32B": "Qwen 2.5 32B",
     "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct"
 
+    ### Gemma (needs authentication)
+
+
+    ### LLama 3 (needs authentication)
+
+
+    ### Llama 2
+
+
     ### ALso run: smaller Llama 3, llama 3.1, llama 2, Gemma
 }
 
@@ -65,6 +74,7 @@ def next_seq_prob(model, tokenizer, seen, unseen):
     device = next(model.parameters()).device  # get model's actual device
     input_ids = tokenizer.encode(seen, return_tensors="pt").to(device)
     unseen_ids = tokenizer.encode(unseen)
+
 
     log_probs = []
     for unseen_id in unseen_ids:
@@ -119,10 +129,9 @@ def main(model_path):
     ### Run model
     with tqdm(total=len(df_fb)) as pbar:
         for index, row in df_fb.iterrows():
-            passage = row['passage'].replace("[MASK].", "")
-            sep = " " if not passage.endswith(" ") else ""
-            start_location = sep + row['start']
-            end_location = sep + row['end']
+            passage = row['passage'].replace(" [MASK].", "").strip()
+            start_location = " " + row['start']
+            end_location =  " " +row['end']
 
 
             start_prob = next_seq_prob(model, tokenizer, passage, start_location)
@@ -158,13 +167,11 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    paths = [
-    'Qwen/Qwen2.5-7B', 'Qwen/Qwen2.5-7B-Instruct', 
-    'Qwen/Qwen2.5-14B', 'Qwen/Qwen2.5-14B-Instruct', 
-    'Qwen/Qwen2.5-32B', 'Qwen/Qwen2.5-32B-Instruct']
+    # paths = ['EleutherAI/pythia-14m']
 
-    for model_path in paths:
+    for model_path in MODELS.keys():
         # model_path = "allenai/OLMo-2-1124-13B-DPO"
+        print("Running: ", model_path)
         main(model_path)
 
 
