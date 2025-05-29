@@ -509,7 +509,7 @@ ggplot(mds_df, aes(Dim1, Dim2,
        y = "MDS 2",
        color = "") +
   theme(text = element_text(size = 15),
-        legend.position = "bottom") +
+        legend.position = "none") +
   scale_color_manual(values = viridisLite::viridis(4, option = "mako", 
                                                    begin = 0.8, end = 0.15)) 
 

@@ -10,6 +10,7 @@ from tqdm import tqdm
 
 #### MODELS
 MODELS = {
+    ### HF models
     "meta-llama/Meta-Llama-3-70B": "Llama 3 70b",
     "meta-llama/Meta-Llama-3-8B": "Llama 3 8b",
     "meta-llama/Meta-Llama-3-8B-Instruct": "Llama 3 8b instruct",
