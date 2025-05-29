@@ -62,6 +62,21 @@ MODELS = {
     "EleutherAI/pythia-160m": "Pythia 160m",
     "EleutherAI/pythia-70m": "Pythia 70m",
     "EleutherAI/pythia-14m": "Pythia 14m",
+
+
+    ### QWEN
+    "Qwen/Qwen2.5-0.5B": "Qwen 2.5 0.5B",
+    "Qwen/Qwen2.5-0.5B-Instruct": "Qwen 2.5 0.5B Instruct",
+    "Qwen/Qwen2.5-1.5B": "Qwen 2.5 1.5B",
+    "Qwen/Qwen2.5-1.5B-Instruct": "Qwen 2.5 1.5 Instruct",
+    "Qwen/Qwen2.5-3B": "Qwen 2.5 3B",
+    "Qwen/Qwen2.5-3B-Instruct": "Qwen 2.5 3B Instruct",
+    "Qwen/Qwen2.5-7B": "Qwen 2.5 7B",
+    "Qwen/Qwen2.5-7B-Instruct": "Qwen 2.5 7B Instruct",
+    "Qwen/Qwen2.5-14B": "Qwen 2.5 14B",
+    "Qwen/Qwen2.5-14B-Instruct": "Qwen 2.5 14B Instruct",
+    "Qwen/Qwen2.5-32B": "Qwen 2.5 32B",
+    "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct"
 }
 
 #### SETUP HF

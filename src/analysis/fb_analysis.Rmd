@@ -318,7 +318,7 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(3, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -346,7 +346,7 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(3, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -477,7 +477,7 @@ cor_matrix
 
 # Plot the correlation matrix
 ggcorrplot(cor_matrix, 
-           hc.order = TRUE,
+           hc.order = FALSE,
            method = "square" 
           )
 
@@ -636,7 +636,7 @@ ppp_with_accuracy %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(3, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -656,11 +656,39 @@ ppp_with_accuracy %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(3, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
 
+### Among models that >50% accuracy, better models explain more variance in human data
+ppp_with_accuracy %>%
+  ggplot(aes(x = mean_accuracy,
+             y = delta_AIC,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "Accuracy",
+       y = "Delta AIC",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(3, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+
+
+mod_ppp = lmer(data = ppp_with_accuracy,
+               delta_AIC ~ # mean_accuracy + 
+                 log10(num_params) + log10(num_training_tokens)+
+                 (1 | model_family))
+
+summary(mod_ppp)
 ```
 
 

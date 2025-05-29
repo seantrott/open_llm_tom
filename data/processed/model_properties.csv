@@ -44,3 +44,12 @@ EleutherAI/pythia-410m,Pythia 410m,505997504,Base,Pythia
 EleutherAI/pythia-160m,Pythia 160m,212654688,Base,Pythia
 EleutherAI/pythia-70m,Pythia 70m,95592496,Base,Pythia
 EleutherAI/pythia-14m,Pythia 14m,39233560,Base,Pythia
+Qwen/Qwen2.5-0.5B,Qwen 2.5 0.5B,494032768,Base,Qwen 2.5
+Qwen/Qwen2.5-0.5B-Instruct,Qwen 2.5 0.5B Instruct,494032768,Instruct,Qwen 2.5
+Qwen/Qwen2.5-1.5B,Qwen 2.5 1.5B,1543714304,Base,Qwen 2.5
+Qwen/Qwen2.5-1.5B-Instruct,Qwen 2.5 1.5 Instruct,1543714304,Instruct,Qwen 2.5
+Qwen/Qwen2.5-3B,Qwen 2.5 3B,3085938688,Base,Qwen 2.5
+Qwen/Qwen2.5-3B-Instruct,Qwen 2.5 3B Instruct,3085938688,Instruct,Qwen 2.5
+Qwen/Qwen2.5-14B,Qwen 2.5 14B,14770033664,Base,Qwen 2.5
+Qwen/Qwen2.5-32B,Qwen 2.5 32B,32763876352,Base,Qwen 2.5
+Qwen/Qwen2.5-32B-Instruct,Qwen 2.5 32B Instruct,32763876352,Instruct,Qwen 2.5

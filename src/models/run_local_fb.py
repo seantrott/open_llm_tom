@@ -158,9 +158,7 @@ def main(model_path):
 
 if __name__ == "__main__":
 
-    paths = ['Qwen/Qwen2.5-0.5B', 'Qwen/Qwen2.5-0.5B-Instruct', 
-    'Qwen/Qwen2.5-1.5B', 'Qwen/Qwen2.5-1.5B-Instruct', 
-    'Qwen/Qwen2.5-3B', 'Qwen/Qwen2.5-3B-Instruct', 
+    paths = [
     'Qwen/Qwen2.5-7B', 'Qwen/Qwen2.5-7B-Instruct', 
     'Qwen/Qwen2.5-14B', 'Qwen/Qwen2.5-14B-Instruct', 
     'Qwen/Qwen2.5-32B', 'Qwen/Qwen2.5-32B-Instruct']
