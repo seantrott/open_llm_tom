@@ -1,7 +1,7 @@
 model_path,model_shorthand,num_params,base_instruct,model_family
 meta-llama/Meta-Llama-3-70B,Llama 3 70b,70553706496,Base,Llama 3
-meta-llama/Meta-Llama-3-8B,LLama 3.1 8B,8030261248,Base,Llama 3.1
-meta-llama/Meta-Llama-3-8B-Instruct,LLama 3.1 8B Instruct,8030261248,Instruct,Llama 3.1
+meta-llama/Meta-Llama-3-8B,LLama 3 8B,8030261248,Base,Llama 3
+meta-llama/Meta-Llama-3-8B-Instruct,LLama 3 8B Instruct,8030261248,Instruct,Llama 3
 meta-llama/Meta-Llama-3-70B-Instruct,Llama 3 70b instruct,70553706496,Instruct,Llama 3
 meta-llama/Llama-3.1-70B,Llama 3.1 70b,70553706496,Base,Llama 3.1
 meta-llama/Llama-3.1-70B-Instruct,Llama 3.1 70B Instruct,70553706496,Instruct,Llama 3.1
