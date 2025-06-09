@@ -136,7 +136,6 @@ def main(model_path):
         for index, row in df_fb.iterrows():
 
             passage = row['passage']
-            print(passage)
             critical_q = "Do you think this is a request?"
             passage_with_q = passage + "\n\n" + critical_q + "\n\nAnswer:"
 
@@ -173,7 +172,6 @@ if __name__ == "__main__":
     # paths = ['EleutherAI/pythia-14m']
 
     for model_path in MODELS.keys():
-        model_path = "EleutherAI/pythia-14m"
         print("Running: ", model_path)
         main(model_path)
 
