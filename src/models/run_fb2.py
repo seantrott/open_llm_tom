@@ -172,10 +172,8 @@ if __name__ == "__main__":
 
     for model_path in MODELS.keys():
         # model_path = "allenai/OLMo-2-1124-13B-DPO"
-        if "EleutherAI" in model_path or "allenai" in model_path or "Qwen" in model_path or "meta" in model_path:
-            continue
         print("Running: ", model_path)
-        # main(model_path)
+        main(model_path)
 
 
 
