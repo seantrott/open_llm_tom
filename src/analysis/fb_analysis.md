@@ -16,9 +16,6 @@ output:
 
 # Load LLM data
 
-**TODO**: Load a separate `.csv` file with information about number of parameters, amount of training data, base vs. instruct.
-
-
 
 ``` r
 # setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
@@ -42,20 +39,6 @@ csv_list <- csv_files %>%
 ## Delimiter: ","
 ## chr (9): passage, start, end, knowledge_cue, first_mention, recent_mention, ...
 ## dbl (3): start_prob, end_prob, log_odds
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## Rows: 0 Columns: 2
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ","
-## chr (2): model_path, model_shorthand
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## Rows: 0 Columns: 2
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ","
-## chr (2): model_path, model_shorthand
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -493,6 +476,14 @@ nrow(df_all_models)
 
 ```
 ## [1] 10560
+```
+
+``` r
+length(unique(df_all_models$model_shorthand))
+```
+
+```
+## [1] 55
 ```
 
 ``` r
@@ -1102,6 +1093,38 @@ mean(results_by_model_path$sig)
 ## [1] 0.3636364
 ```
 
+``` r
+results_by_model_path %>%
+  filter(sig == TRUE) %>%
+  select(model_path, LRT_stat, p_adj, condition_coef)
+```
+
+```
+## # A tibble: 20 × 4
+##    model_path                           LRT_stat     p_adj condition_coef
+##    <chr>                                   <dbl>     <dbl>          <dbl>
+##  1 Qwen/Qwen2.5-14B                         13.5 0.00954            -3.00
+##  2 Qwen/Qwen2.5-32B                         17.1 0.00156            -2.57
+##  3 Qwen/Qwen2.5-32B-Instruct                12.2 0.0172             -3.25
+##  4 Qwen/Qwen2.5-72B-Instruct                21.1 0.000226           -3.17
+##  5 allenai/OLMo-2-0325-32B                  17.2 0.00153            -2.67
+##  6 allenai/OLMo-2-0325-32B-DPO              20.9 0.000244           -4.66
+##  7 allenai/OLMo-2-0325-32B-Instruct         20.3 0.000336           -4.72
+##  8 allenai/OLMo-2-0325-32B-SFT              21.4 0.000203           -2.69
+##  9 allenai/OLMo-2-1124-13B                  14.5 0.00596            -2.93
+## 10 allenai/OLMo-2-1124-13B-DPO              13.4 0.00999            -6.32
+## 11 allenai/OLMo-2-1124-13B-Instruct         14.1 0.00716            -6.98
+## 12 allenai/OLMo-2-1124-13B-SFT              13.1 0.0113             -3.28
+## 13 allenai/OLMo-2-1124-7B-DPO               15.8 0.00300            -4.90
+## 14 allenai/OLMo-2-1124-7B-Instruct          16.4 0.00225            -5.38
+## 15 allenai/OLMo-2-1124-7B-SFT               11.9 0.0199             -2.18
+## 16 meta-llama/Llama-3.1-70B                 25.5 0.0000249          -2.34
+## 17 meta-llama/Llama-3.1-70B-Instruct        19.3 0.000529           -3.39
+## 18 meta-llama/Llama-3.1-8B-Instruct         17.9 0.00107            -1.59
+## 19 meta-llama/Meta-Llama-3-70B              24.4 0.0000419          -2.59
+## 20 meta-llama/Meta-Llama-3-70B-Instruct     19.6 0.000468           -6.52
+```
+
 
 All models together:
 
@@ -1244,6 +1267,25 @@ mean(df_all_models$correct)
 ```
 
 ``` r
+df_summ %>%
+  ungroup() %>%
+  arrange(desc(mean_accuracy)) %>%
+  select(model_shorthand, mean_accuracy) %>%
+  head(5)
+```
+
+```
+## # A tibble: 5 × 2
+##   model_shorthand      mean_accuracy
+##   <chr>                        <dbl>
+## 1 Olmo 2 13b Dpo               0.745
+## 2 Olmo 2 13b Instruct          0.745
+## 3 Olmo 2 13b Sft               0.734
+## 4 Llama 3 70b Instruct         0.734
+## 5 Olmo 2 13b                   0.698
+```
+
+``` r
 ### "Wisdom of the crowd"?
 df_lo_avg = df_all_models %>%
   group_by(passage, condition) %>%
@@ -1346,10 +1388,11 @@ df_summ %>%
 ![](fb_analysis_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
 
 ``` r
-### How does model size predict accuracy?
+### How do model properties predict the probability of a correct response?
 mod_full = glmer(data = df_all_models,
                  correct ~ condition + knowledge_cue  +
-                   log10(num_params) + log10(num_training_tokens) + base_instruct + 
+                   log10(num_params) + log10(num_training_tokens) + 
+                  base_instruct + 
                    (1 | start) + (1|model_family), 
                  family = binomial())
 summary(mod_full)
@@ -1397,6 +1440,28 @@ summary(mod_full)
 ## bs_nstrctIn  0.134  0.000  0.000 -0.021 -0.140
 ```
 
+``` r
+### Plot coefficients
+df_coef <- broom.mixed::tidy(mod_full, effects = "fixed") %>%
+  mutate(term = forcats::fct_reorder(term, estimate))
+
+
+df_coef %>%
+  filter(term != "(Intercept)") %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error),
+                width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray40") +
+  coord_flip() +
+  labs(
+    x = NULL, y = "Coefficient Estimate",
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+![](fb_analysis_files/figure-html/unnamed-chunk-6-3.png)<!-- -->
+
 ## Item-wise analysis
 
 
@@ -1407,19 +1472,17 @@ df_item_accuracy = df_all_models %>%
   arrange(mean_accuracy)
 
 df_item_accuracy %>%
-  ggplot(aes(x = mean_accuracy)) +
-  geom_histogram(alpha = .5) +
-  labs(x = "Item-wise accuracy",
-       y = "Count",
+  ggplot(aes(x = reorder(start, mean_accuracy), y = mean_accuracy)) +
+  geom_bar(stat = "identity", alpha = .6) +
+  labs(x = "Item",
+       y = "Mean Accuracy",
        color = "",
        shape = "") +
   theme_minimal() +
+  geom_hline(linetype = "dotted", yintercept = .5) +
+  coord_flip() +
   theme(text = element_text(size = 15),
         legend.position="bottom")
-```
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 ![](fb_analysis_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
@@ -1493,14 +1556,20 @@ df_merged = df_all_models %>%
   bind_rows(df_by_item)
 ```
 
-## Recreate model-wise distributions
+
+## Top-performing models
 
 
 ``` r
-### Visualization
 df_merged %>%
+  filter(model_shorthand %in% c("Human",
+                                "Olmo 2 13b Dpo",
+                                "Olmo 2 13b Instruct",
+                                "Olmo 2 13b Sft",
+                                "Llama 3 70b Instruct",
+                                "Olmo 2 13b")) %>%
   ggplot(aes(x = log_odds,
-             y = reorder(model_shorthand, num_params),
+             y = model_shorthand,
              fill = condition)) +
   geom_density_ridges2(aes(height = ..density..), 
                        color=NA, 
@@ -1527,6 +1596,7 @@ df_merged %>%
 ```
 
 ![](fb_analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
 
 
 ## Correlation matrix
@@ -2650,7 +2720,11 @@ cor_matrix
 ggcorrplot(cor_matrix, 
            hc.order = FALSE,
            method = "square" 
-          )
+          ) +
+  theme(
+    axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 6)
+  )
 ```
 
 ![](fb_analysis_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
@@ -2722,9 +2796,35 @@ mds_df = mds_df %>%
 ```
 
 ``` r
+cor(mds_df$Dim1, mds_df$mean_accuracy)
+```
+
+```
+## [1] 0.5281938
+```
+
+``` r
+cor(mds_df$Dim2, mds_df$mean_accuracy)
+```
+
+```
+## [1] 0.6961526
+```
+
+``` r
+mds_df = mds_df %>%
+  inner_join(results_by_model_path)
+```
+
+```
+## Joining with `by = join_by(model_path)`
+```
+
+``` r
 ggplot(mds_df, aes(Dim1, Dim2, 
                    color = model_family,
-                   size = mean_accuracy)) +
+                   size = mean_accuracy,
+                   shape = sig)) +
   geom_point(alpha = .5) +
   theme_minimal() +
   labs(x = "MDS 1",
@@ -3242,64 +3342,15 @@ summary(mod_full)
 ``` r
 ### Comopare to parameter estimate for LLMs, using binary outcome
 df_all_models$is_start = df_all_models$log_odds > 0
-mod_all_lms_categorical = glmer(is_start ~ condition + knowledge_cue + 
-          first_mention + recent_mention +
-            (1 + condition | model_path) + (1 | start),
-        data = df_all_models,
-        family = binomial())
-summary(mod_all_lms_categorical)
-```
 
-```
-## Generalized linear mixed model fit by maximum likelihood (Laplace
-##   Approximation) [glmerMod]
-##  Family: binomial  ( logit )
-## Formula: 
-## is_start ~ condition + knowledge_cue + first_mention + recent_mention +  
-##     (1 + condition | model_path) + (1 | start)
-##    Data: df_all_models
-## 
-##       AIC       BIC    logLik -2*log(L)  df.resid 
-##   12104.1   12169.4   -6043.0   12086.1     10551 
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -9.3177 -0.7620  0.1491  0.7755  3.9319 
-## 
-## Random effects:
-##  Groups     Name                 Variance Std.Dev. Corr 
-##  model_path (Intercept)          2.373    1.5404        
-##             conditionTrue Belief 1.201    1.0957   -0.89
-##  start      (Intercept)          0.207    0.4549        
-## Number of obs: 10560, groups:  model_path, 55; start, 10
-## 
-## Fixed effects:
-##                       Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)            1.05182    0.25949   4.053 5.05e-05 ***
-## conditionTrue Belief  -0.94348    0.15690  -6.013 1.82e-09 ***
-## knowledge_cueImplicit -0.73516    0.04498 -16.343  < 2e-16 ***
-## first_mentionStart     0.01097    0.04457   0.246   0.8056    
-## recent_mentionStart    0.09870    0.04457   2.214   0.0268 *  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Correlation of Fixed Effects:
-##             (Intr) cndtTB knwl_I frst_S
-## condtnTrBlf -0.719                     
-## knwldg_cImp -0.094  0.017              
-## frst_mntnSt -0.086  0.000 -0.001       
-## rcnt_mntnSt -0.084 -0.002 -0.008  0.000
-```
 
-``` r
 coef_human <- fixef(mod_full)
-coef_llms <- fixef(mod_all_lms_categorical)
 
 # Create aligned dataframe
 group_coefs <- tibble(
-  model_path = c("Human", "LLMs"),
-  knowledge_cue_coef = c(coef_human["knowledge_cueImplicit"], coef_llms["knowledge_cueImplicit"]),
-  condition_coef = c(coef_human["conditionTrue Belief"], coef_llms["conditionTrue Belief"])
+  model_path = c("Human"),
+  knowledge_cue_coef = c(coef_human["knowledge_cueImplicit"]),
+  condition_coef = c(coef_human["conditionTrue Belief"])
 )
 
 ## Each model on its own
@@ -3446,20 +3497,5 @@ all_coefs_long %>%
 ```
 
 ![](fb_analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
-
-``` r
-all_coefs_long %>%
-  arrange(Estimate) %>%
-  head(3)
-```
-
-```
-## # A tibble: 3 × 3
-##   model_path                  Term                    Estimate
-##   <chr>                       <fct>                      <dbl>
-## 1 google/gemma-2b-it          Condition (True Belief)    -25.8
-## 2 meta-llama/Meta-Llama-3-70B Condition (True Belief)    -22.1
-## 3 meta-llama/Llama-3.1-70B    Condition (True Belief)    -19.8
-```
 
 
