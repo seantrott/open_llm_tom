@@ -62,13 +62,13 @@ MODELS = {
 
 
     ### LLama 3 (needs authentication)
-    # "meta-llama/Meta-Llama-3-8B": "LLaMA 3 8B",
-    # "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3 8B Instruct",
+    "meta-llama/Meta-Llama-3-8B": "LLaMA 3 8B",
+    "meta-llama/Meta-Llama-3-8B-Instruct": "LLaMA 3 8B Instruct",
 
     ### Llama 3.1 (needs authentication)
     ### TODO: RUN Llama 3
-    # "meta-llama/Llama-3.1-8B": "LLaMA 3.1 8B",
-    # "meta-llama/Llama-3.1-8B-Instruct": "LLaMA 3.1 8B Instruct",
+    "meta-llama/Llama-3.1-8B": "LLaMA 3.1 8B",
+    "meta-llama/Llama-3.1-8B-Instruct": "LLaMA 3.1 8B Instruct",
 
 }
 
@@ -117,6 +117,12 @@ def main(model_path):
 
     print(filename)
     print(savepath)
+
+    print("Checking if we've already run this analysis...")
+    if os.path.exists(os.path.join(savepath,filename)):
+        print("Already run this model for this checkpoint.")
+        return
+
 
     ### Load model
     model = AutoModelForCausalLM.from_pretrained(
