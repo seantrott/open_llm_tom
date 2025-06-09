@@ -1,0 +1,377 @@
+yes_prob,no_prob,passage,item,knowledge_cue,log_odds,condition,model_path,model_shorthand
+1.3997800729737366e-15,2.3069757587682602e-15,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+You fill up the tank, and then the two of you go inside the gas station to buy some water and snacks. When you return to the car and start up the engine, you and Jonathan both notice with some dismay a blinking light, which indicates that the car's heating system is broken. You both bundle up.
+ 
+As you leave the station, Jonathan shivers in his seat.",1,explicit,-0.7208026692088896,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.333510756279402e-15,2.1926072526476164e-15,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+You fill up the tank, and then the two of you go inside the gas station to buy some water and snacks. When you return to the car and start up the engine, you and Jonathan notice with some dismay a blinking light, which indicates that the car's heating system is broken. You both bundle up.
+ 
+As you leave the station, Jonathan shivers in his seat.",1,implicit,-0.7174179527450881,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.919054373324295e-16,8.297156762850414e-16,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+While you fill up the tank, Jonathan goes inside to buy some water and snacks. As you're checking the meter, you notice with some dismay a blinking light, which indicates that the car's heating system is broken. You finish filling up the gas and wait for Jonathan, who is still inside and doesn't know about the broken heater.
+ 
+Jonathan returns with some snacks, and you both set off. As you leave the station, he shivers in his seat. ",1,explicit,-0.7542360419231389,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+5.513094990497089e-16,9.203614365310524e-16,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+While you fill up the tank, Jonathan goes inside to buy some water and snacks. As you're checking the meter, you notice with some dismay a blinking light, which indicates that the car's heating system is broken. You finish filling up the gas and wait for Jonathan.
+ 
+Jonathan returns with some snacks, and you both set off. As you leave the station, he shivers in his seat. ",1,implicit,-0.739338076152298,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.6033627477804132e-15,2.6848301685165887e-15,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, during a house meeting with you and Brian, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening. Brian seems satisfied by this plan.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,explicit,-0.7437299716122262,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.022592281782391e-15,3.383433932533492e-15,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, during a house meeting with you and Brian, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,implicit,-0.7422826898397503,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.3801777188710224e-15,2.322153530391873e-15,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening. Brian was still sleeping, so he's unaware of this plan.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,explicit,-0.7506093120001878,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.5419271304787036e-15,2.5463426109811156e-15,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,implicit,-0.7236919603221099,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.566734195287421e-16,7.812198636811805e-16,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+When Sarah sits down, you flip through the pamphlet together; you're both surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah seems saddened by the news.
+ 
+About five minutes later, your food is served. ",3,explicit,-0.7745658116229324,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.973873071493679e-16,6.789220535149433e-16,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+When Sarah sits down, you flip through the pamphlet together; you're both surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes.
+ 
+About five minutes later, your food is served. ",3,implicit,-0.772700156786513,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+8.469360678609581e-16,1.4327672417089633e-15,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+While Sarah is washing her hands in the restroom, you flip through the pamphlet; you're surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah returns to the table, unaware that she's allergic to potatoes.
+ 
+About five minutes later, your food is served.",3,explicit,-0.7584792825846307,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+9.699804148229725e-16,1.6405465412528113e-15,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+While Sarah is washing her hands in the restroom, you flip through the pamphlet; you're surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah returns to the table.
+ 
+About five minutes later, your food is served.",3,implicit,-0.7581489999685511,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.791317619025676e-16,6.446936638746339e-16,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by the same guest's table. He is staring down at his meal with irritation. You pass by and he recognizes you as the guest from the line, whom he'd formerly mistaken for a waiter.",4,explicit,-0.7659144807012311,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+6.093739252213464e-16,1.0432603055843758e-15,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by the same guest's table. He is staring down at his meal with irritation. You pass by.",4,implicit,-0.775699497649561,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+7.170845935578938e-16,1.231650279811744e-15,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by another guest's table. He is staring down at his meal with irritation. As you pass by, he looks up at you and catches your eye.",4,explicit,-0.7803774420364344,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+7.170845935578938e-16,1.231650279811744e-15,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by another guest's table. He is staring down at his meal with irritation. As you pass by, he looks up at you and catches your eye.",4,implicit,-0.7803774420364344,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.0961003384164672e-15,1.828082600390229e-15,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+With your dad's encouragement, she calls a painting company to come and paint the fence; they schedule a time two days from now. This seems to satisfy your dad.
+ 
+Later in the day, you're reading in the living room. Your dad walks in and peers out the window with a slightly displeased expression on his face.",5,explicit,-0.7379513883638752,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.0451883643305634e-15,1.7421209323425341e-15,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+With your dad's encouragement, she calls a painting company to come and paint the fence; they schedule a time two days from now.
+ 
+Later in the day, you're reading in the living room. Your dad walks in and peers out the window with a slightly displeased expression on his face.",5,implicit,-0.7370818056828095,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+8.020526390189e-16,1.3352413504697609e-15,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+While your dad's away at work, she calls a painting company to come and paint the fence; they schedule a time two days from now. Unfortunately, your dad hasn't yet heard about this plan.
+ 
+Later in the day, you're reading in the living room when your dad returns from work. He walks in and peers out the window with a slightly displeased expression on his face.",5,explicit,-0.7353317091354279,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.10655706602944e-15,1.836463144370363e-15,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+While your dad's away at work, she calls a painting company to come and paint the fence; they schedule a time two days from now.
+ 
+Later in the day, you're reading in the living room when your dad returns from work. He walks in and peers out the window with a slightly displeased expression on his face.",5,implicit,-0.7308520891976125,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.6225288799152915e-15,2.5483248798359275e-15,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you both see a notice taped to your apartment door: unfortunately, the water in your apartment building will be shut off for the next 24 hours. Your friend seems disconcerted by the news.",6,explicit,-0.6513050576072865,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.4976601298640098e-15,2.3887118970794584e-15,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you both see a notice taped to your apartment door: unfortunately, the water in your apartment building will be shut off for the next 24 hours.",6,implicit,-0.6735225963530065,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.2842850130332446e-15,2.077820312251029e-15,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you go to your room, and privately check your email. You see that your landlord has sent you a message: unfortunately, the water in your apartment building will be shut off for the next 24 hours. Your friend, of course, doesn't know about this yet.",6,explicit,-0.694105490929364,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.7626093887871948e-15,2.7891098769607233e-15,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you go to your room, and privately check your email. You see that your landlord has sent you a message: unfortunately, the water in your apartment building will be shut off for the next 24 hours.",6,implicit,-0.6620919754790671,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.510844843845215e-16,7.8076998330707005e-16,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+Sadly, you call out from the kitchen that the wine is all gone. Your date murmurs something in reply, sounding disappointed.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,explicit,-0.7914999259639925,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.9312482560054747e-16,6.77584376732992e-16,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+Sadly, you call out from the kitchen that the wine is all gone.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,implicit,-0.7854131384211283,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.484320536497538e-16,7.748890864938426e-16,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+You walk back towards the dining room, unsure about what to tell your date, who doesn't yet know that there's no more wine.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,explicit,-0.7891004206713779,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+5.599806282703104e-16,9.660476408488708e-16,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+You walk back towards the dining room, unsure about what to tell your date.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,implicit,-0.7867174175742002,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.1584724565204848e-15,2.0051535674643194e-15,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at nearby coffee shop.
+ 
+While you and Rob are sitting talking, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. Rob knows how much you rely on that car, so he understands your frustration.
+ 
+Once the mechanic leaves, you and Rob get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,explicit,-0.7914889881666407,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.1125844466029831e-15,1.9364903239028073e-15,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at nearby coffee shop.
+ 
+While you and Rob are sitting talking, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week.
+ 
+Once the mechanic leaves, you and Rob get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,implicit,-0.799529449982831,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.0121157511467824e-15,1.807943121519837e-15,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at a nearby coffee shop.
+ 
+Before you sit down, Rob steps outside to take a phone call. While he's outside, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. You rely on that car, so this is very frustrating.
+ 
+Anyway, Rob finishes his phone call and returns to the table, and you both get to talking. Rob realizes you've both been invited to the same party later on in the week, but missed the conversation with your mechanic about your car still being in the shop.",8,explicit,-0.8369749967705501,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+9.21327477607396e-16,1.623463686651705e-15,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at a nearby coffee shop.
+ 
+Before you sit down, Rob steps outside to take a phone call. While he's outside, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. You rely on that car, so this is very frustrating.
+ 
+Anyway, Rob finishes his phone call and returns to the table, and you both get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,implicit,-0.8172891694106732,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+7.90621280886103e-17,1.3515574020255856e-16,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, you arrive at the theater at the same time as your friend. You greet each other, then head towards the pay-stand. As you walk together, you check your pockets; you realize you don't have any cash, and you left your credit card at home. You curse, saying, ""I can't believe I left my wallet at home."" Your friend looks surprised that you forgot your money, since that is very unlike you. 
+
+Then, just as your friend is about to pay, her face suddenly falls. She groans, then turns back to you in disbelief. ",9,explicit,-0.7735640925799948,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+7.797278416143716e-17,1.3420681183872753e-16,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, you arrive at the theater at the same time as your friend. You greet each other, then head towards the pay-stand. As you walk together, you check your pockets; you realize you don't have any cash, and you left your credit card at home. You curse, saying, ""I can't believe I left my wallet at home.""
+
+Then, just as your friend is about to pay, her face suddenly falls. She groans, then turns back to you in disbelief. ",9,implicit,-0.7834153445929436,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.1163249705678377e-16,1.9759567388191577e-16,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, just after you arrive at the theater, you realize you don't have any cash on you, and you left your credit card at home. You curse, saying to yourself, ""I can't believe I left my wallet at home."" 
+
+Your friend shows up just after your realization, greets you, and heads right to the pay-stand, not yet aware that you don't have any money. 
+
+As your friend is about to pay, her face suddenly falls. She groans, then turns back to you sheepishly. ",9,explicit,-0.8237942935562744,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.4393457495635935e-16,2.5065867490248206e-16,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, just after you arrive at the theater, you realize you don't have any cash on you, and you left your credit card at home. You curse, saying to yourself, ""I can't believe I left my wallet at home."" 
+
+Your friend shows up just after your realization, greets you, and heads right to the pay-stand.
+
+As your friend is about to pay, her face suddenly falls. She groans, then turns back to you sheepishly. ",9,implicit,-0.8003109765752469,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.6785854409552423e-16,2.9315029445973085e-16,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Feeling a thirst coming on, you head into the kitchen, closely followed by your friend. You check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself; your friend watches and shakes his head disapprovingly, seeing that there are no beers left. 
+
+Later, back in the living room, you drain your beer and set it down on the table. Your friend smacks his lips.",10,explicit,-0.8043945329704151,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.689554335961222e-16,4.650289760369322e-16,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Feeling a thirst coming on, you head into the kitchen, closely followed by your friend. You check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself; your friend watches and shakes his head disapprovingly.
+
+Later, back in the living room, you drain your beer and set it down on the table. Your friend smacks his lips.",10,implicit,-0.7899534782050708,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.1968843719845566e-16,3.763061923394253e-16,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Your friend collapses onto the couch, breathing a sigh of relief. Feeling a thirst coming on, you head into the kitchen and check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself. 
+
+You return to the living room. Your friend sees you holding the beer, but isn't aware that there are no more left. ",10,explicit,-0.7764480912102785,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.875265416929208e-16,8.234409620908999e-16,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Your friend collapses onto the couch, breathing a sigh of relief. Feeling a thirst coming on, you head into the kitchen and check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself. 
+
+You return to the living room. Your friend sees you holding the beer.",10,implicit,-0.756184453812731,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.172184130874e-16,7.074985628751393e-16,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+You all gather together in your usual spots: you sit in a chair closest to the television, and your parents sit on the couch. But when you turn on the TV, there's a crackling noise from the speakers. After some fiddling around, you all realize that they're broken. 
+
+Still, you decide to watch anyway, using the built-in speakers on the TV. The show starts, but the built-in speakers just don't project at all. 
+
+Your father groans and looks over at you. ",11,explicit,-0.7619243877570689,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.962716588787156e-16,6.718883448605028e-16,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+You all gather together in your usual spots: you sit in a chair closest to the television, and your parents sit on the couch. But when you turn on the TV, there's a crackling noise from the speakers. After some fiddling around, you realize that they're broken. 
+
+Still, you decide to watch anyway, using the built-in speakers on the TV. The show starts, but the built-in speakers just don't project at all. 
+
+Your father groans and looks over at you. ",11,implicit,-0.7617317140086652,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.2072939605475525e-16,5.391612466410694e-16,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+Before your parents arrive, you get settled in your usual spot: the chair closest to the television. But when you turn on the TV, there's a crackling noise from the speakers. You realize that they're broken, so you decide to just use the built-in speakers on the TV. 
+
+Later, your parents come into the room and sit on the couch. The show starts, but the built-in speakers just don't project at all. Your parents don't realize that this is the loudest it will get, since the other speakers are broken. 
+
+Your father groans and looks over at you. ",11,explicit,-0.7493602152151655,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+5.053275214146212e-16,8.380179226571136e-16,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+Before your parents arrive, you get settled in your usual spot: the chair closest to the television. But when you turn on the TV, there's a crackling noise from the speakers. You realize that they're broken, so you decide to just use the built-in speakers on the TV. 
+
+Later, your parents come into the room and sit on the couch. The show starts, but the built-in speakers just don't project at all.
+
+Your father groans and looks over at you. ",11,implicit,-0.7297623442023832,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+6.930706139331933e-17,1.2023201228867286e-16,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, you and Claire both run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. You and Claire both know you'll have to wait to empty it until the services start up again. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head.",12,explicit,-0.7947468160838109,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+6.558681989708454e-17,1.1243896506679847e-16,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, you and Claire both run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off.
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head.",12,implicit,-0.7776642497263254,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+5.841094867384822e-17,1.0242919291729018e-16,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, while Claire is away, you run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. You're pretty forgetful though, so it slips your mind when Claire gets home later; thus, she doesn't know that there's nowhere to empty the bin. 
+
+A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head. ",12,explicit,-0.8103162290158263,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.2934440597012442e-16,2.2533789549373563e-16,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, while Claire is away, you run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. You're pretty forgetful though, so it slips your mind when Claire gets home later.
+
+A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head. ",12,implicit,-0.8008722945879991,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.3883642429941697e-16,4.0975623811054685e-16,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. 
+
+One afternoon, a familiar-looking customer enters the store. Just as he approaches the counter, you both hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" The customer looks disappointed when he hears this. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,explicit,-0.7787430381018021,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.0514039486645684e-16,3.4905539542080073e-16,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. 
+
+One afternoon, a familiar-looking customer enters the store. Just as he approaches the counter, you both hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,implicit,-0.766844406076594,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.988899749987832e-16,5.258364654686935e-16,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. One afternoon, the cafe runs out especially early, and you hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" 
+
+Soon after, a familiar-looking customer enters the store, unaware that you've just run out of the most popular item. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,explicit,-0.8149996840678199,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.6841875388349125e-16,6.4163905130859805e-16,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. One afternoon, the cafe runs out especially early, and you hear a shout from the back room: ""Hey, we're out of chocolate croissants!""
+
+Soon after, a familiar-looking customer enters the store. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,implicit,-0.8004154476475784,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.212339100539636e-16,5.653163535028613e-16,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. You text a couple of your friends, including Harold, that you are having a really hard time and won't be able to complete the work. 
+
+The next day, Harold approaches you before class. He knows that you weren't able to finish the homework. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,explicit,-0.8154342374712,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+3.7816542965864847e-16,6.60669764051034e-16,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. You text a couple of your friends, including Harold, that you are having a really hard time and won't be able to complete the work. 
+
+The next day, Harold approaches you before class. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,implicit,-0.8049118364016082,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.973811876990734e-16,8.827325801844313e-16,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. 
+
+The next day, Harold approaches you before class. He doesn't know that you struggled with the homework, assuming that, as usual, you completed all of it. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,explicit,-0.8276245042088108,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+4.994307427336328e-16,8.725881959707586e-16,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. 
+
+The next day, Harold approaches you before class. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,implicit,-0.8050163277514596,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.0913226093728099e-16,1.853055699243907e-16,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One evening, after Terry has returned home, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. With Terry watching, you make an appointment for someone to come fix the machine. 
+
+Terry knows that you made an appointment to fix the broken washing machine, and seems satisfied. The laundry hamper is growing ominously large at this point.  ",15,explicit,-0.7638286022055266,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.385008056601638e-16,2.3313742781161243e-16,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One evening, after Terry has returned home, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. With Terry watching, you make an appointment for someone to come fix the machine. 
+
+The laundry hamper is growing ominously large at this point.  ",15,implicit,-0.7512862644161533,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+7.161384312860311e-17,1.2205693153864245e-16,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One day, while Terry is at work, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. You make an appointment for someone to come fix the machine. 
+
+Soon after, Terry returns home exhausted, and also not yet realizing that the washing machine is broken. The laundry hamper is growing ominously large at this point. ",15,explicit,-0.7692438312258776,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+6.291154574252064e-17,1.0594058785246758e-16,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One day, while Terry is at work, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. You make an appointment for someone to come fix the machine. 
+
+Soon after, Terry returns home exhausted. The laundry hamper is growing ominously large at this point. ",15,implicit,-0.751858704268601,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.3247491569796156e-16,3.9731909452733435e-16,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is helping you carry your mattress into your bedroom, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Knowing you are hurt, Paul finishes pushing the mattress into the room. 
+
+The two of you go back outside, and see Paul's gargantuan desk sitting in the driveway. Paul looks at the desk doubtfully. ",16,explicit,-0.7732230725156699,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+2.2274237478511164e-16,3.8275449534819466e-16,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is helping you carry your mattress into your bedroom, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Paul finishes pushing the mattress into the room. 
+
+The two of you go back outside, and see Paul's gargantuan desk sitting in the driveway. Paul looks at the desk doubtfully. ",16,implicit,-0.7810432775619404,aware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.0305156361017508e-16,1.7773005135128306e-16,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is still outside and you are carrying your mattress into your room, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Paul, however, didn't see what happened, so he doesn't know that you are hurt. 
+
+When you go back outside, you see that Paul is still out front, looking at his gargantuan desk. ",16,explicit,-0.7863212438131822,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
+1.7290310175245642e-16,2.983374977589366e-16,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is still outside and you are carrying your mattress into your room, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture.
+
+When you go back outside, you see that Paul is still out front, looking at his gargantuan desk. ",16,implicit,-0.7869815699663911,unaware,meta-llama/Llama-3.1-8B,LLaMA 3.1 8B
