@@ -106,7 +106,7 @@ def next_seq_prob(model, tokenizer, seen, unseen):
 def main(model_path):
 
     # Set up save path, filename, etc.
-    savepath = f"data/processed/ir_local/"
+    savepath = f"data/processed/fb2_local/"
     if not os.path.exists(savepath): 
         os.makedirs(savepath)
 
