@@ -57,10 +57,8 @@ MODELS = {
     "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct",
 
     ### Gemma (needs authentication)
-    # "google/gemma-2b": "Gemma 2 2B",
-    # "google/gemma-2b-it": "Gemma 2 2B Instruct",
-    "google/gemma-7b": "Gemma 2 7B",
-    "google/gemma-7b-it": "Gemma 2 7B Instruct",
+    "google/gemma-2b": "Gemma 2 2B",
+    "google/gemma-2b-it": "Gemma 2 2B Instruct",
 
 
     ### LLama 3 (needs authentication)
@@ -138,10 +136,10 @@ def main(model_path):
         for index, row in df_fb.iterrows():
 
             passage = row['passage']
-            passage_with_q = passage + "\n\n" + row['critical_q'] + "\n\n"
+            passage_with_q = passage + "\n\n" + row['critical_q'] + "\n\nAnswer:"
 
-            yes_prob = next_seq_prob(model, tokenizer, passage_with_q, "Yes")
-            no_prob = next_seq_prob(model, tokenizer, passage, "No")
+            yes_prob = next_seq_prob(model, tokenizer, passage_with_q, " Yes")
+            no_prob = next_seq_prob(model, tokenizer, passage, " No")
 
             if yes_prob == 0 or no_prob == 0:
                 continue
