@@ -136,7 +136,9 @@ def main(model_path):
         for index, row in df_fb.iterrows():
 
             passage = row['passage']
-            passage_with_q = passage + "\n\n" + row['critical_q'] + "\n\nAnswer:"
+            print(passage)
+            critical_q = "Do you think this is a request?"
+            passage_with_q = passage + "\n\n" + critical_q + "\n\nAnswer:"
 
             yes_prob = next_seq_prob(model, tokenizer, passage_with_q, " Yes")
             no_prob = next_seq_prob(model, tokenizer, passage_with_q, " No")
@@ -171,7 +173,7 @@ if __name__ == "__main__":
     # paths = ['EleutherAI/pythia-14m']
 
     for model_path in MODELS.keys():
-        # model_path = "allenai/OLMo-2-1124-13B-DPO"
+        model_path = "EleutherAI/pythia-14m"
         print("Running: ", model_path)
         main(model_path)
 
