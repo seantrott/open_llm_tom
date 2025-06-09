@@ -111,9 +111,9 @@ def main(model_path):
         os.makedirs(savepath)
 
     if "/" in model_path:
-        filename = "ir-" + model_path.split("/")[1] + ".csv"
+        filename = "fb2-" + model_path.split("/")[1] + ".csv"
     else:
-        filename = "ir-" + model_path + ".csv"
+        filename = "fb2-" + model_path + ".csv"
 
     print(filename)
     print(savepath)
@@ -128,7 +128,7 @@ def main(model_path):
 
 
     ### Load data
-    df_fb = pd.read_csv("data/raw/ir.csv")
+    df_fb = pd.read_csv("data/raw/fb2.csv")
 
     results = []
     ### Run model
@@ -139,7 +139,7 @@ def main(model_path):
             passage_with_q = passage + "\n\n" + row['critical_q'] + "\n\nAnswer:"
 
             yes_prob = next_seq_prob(model, tokenizer, passage_with_q, " Yes")
-            no_prob = next_seq_prob(model, tokenizer, passage, " No")
+            no_prob = next_seq_prob(model, tokenizer, passage_with_q, " No")
 
             if yes_prob == 0 or no_prob == 0:
                 continue
@@ -164,7 +164,7 @@ def main(model_path):
     df_results['model_shorthand'] = MODELS[model_path]
 
 
-    print(df_results.groupby("condition").mean("log_odds"))
+    print(df_results.groupby(["condition", "knowledge_cue"]).mean("log_odds"))
 
     df_results.to_csv(os.path.join(savepath,filename), index=False)
 
