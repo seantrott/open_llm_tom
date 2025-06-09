@@ -182,7 +182,7 @@ if __name__ == "__main__":
         print("Running: ", model_path)
         # main(model_path)
 
-    model_path = "EleutherAI/pythia-14m"
+    model_path = "allenai/OLMo-2-1124-13B"
     main(model_path)
 
 
