@@ -21,7 +21,7 @@ MODELS = {
     'allenai/OLMo-2-1124-13B-SFT': 'OLMO 2 13B SFT', 
     'allenai/OLMo-2-1124-13B-DPO': 'OLMo 2 13B DPO', 
     'allenai/OLMo-2-1124-13B-Instruct': 'OLMO 2 13B Instruct',
-    # 'allenai/OLMo-2-0325-32B': 'OLMO 2 32B',
+    'allenai/OLMo-2-0325-32B': 'OLMO 2 32B',
     'allenai/OLMo-2-0325-32B-SFT': 'OLMO 2 32B SFT', 
     'allenai/OLMo-2-0325-32B-Instruct': 'OLMO 2 32B Instruct',
     'allenai/OLMo-2-0325-32B-DPO': 'OLMO 2 32B DPO',
