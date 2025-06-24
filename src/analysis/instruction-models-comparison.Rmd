@@ -1,0 +1,117 @@
+---
+title: "Instruction Model Comparison: False Belief"
+author: "Samuel Taylor"
+date: "2025-06-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(glue)
+library(pbapply)
+library(irr)
+library(rlang)
+library(ggridges)
+library(viridis)
+library(dplyr)
+
+setwd("~/Documents/code/open-ToM-LLM")
+```
+
+## About
+
+This script compares instruction-tuned models using the original completion-style prompt formatting, vs a prompt format that respects their respective chat-template, as described on each model's HuggingFace page (and stored within each model's tokenizer, as `tokenizer.apply_chat_template`). Ideally, this reformatted prompt template is minimally different from the original completion-style prompt.
+
+```{r file.load}
+INSTRUCTION.TUNED.COMPLETION.PROMPT.DIRECTORY    = "open_llm_tom/data/processed/fb_local/"
+INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY = "data/instruction-models/fb_local/"
+INSTRUCTION.TUNED.CHAT.TEMPLATE.QUESTION.PROMPT.DIRECTORY = "data/instruction-models/question-format/fb_local/"
+
+# Get the names of models where chat-template data exists (a subset of all models run on FB task)
+it.model.names = list.files(
+  path = INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY,
+  pattern = "*.csv",
+  full.names = FALSE
+)
+
+# Read in all CSVs for chat-template data into one CSV
+it.chat.template.df = it.model.names %>% 
+  lapply(function(model) { 
+    read.csv(glue("{INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY}/{model}"))
+  }) %>% 
+  bind_rows() %>%
+  dplyr::mutate(prompt.method = "chat.template")
+
+it.chat.template.df$prompt[[1]]
+
+# Read in the original data for instruction-models (False Belief ran as a completion model)
+it.completion.df = it.model.names %>% 
+  lapply(function(model) { 
+    read.csv(glue("{INSTRUCTION.TUNED.COMPLETION.PROMPT.DIRECTORY}/{model}"))
+  }) %>% 
+  bind_rows() %>%
+  dplyr::mutate(prompt.method = "completion") %>%
+  dplyr::mutate(prompt = passage)
+
+it.completion.df$prompt[1]
+
+# Read in the CSVs for the chat template with question format
+it.chat.template.q.format.df = it.model.names %>%
+  lapply(function(model) { 
+    read.csv(glue("{INSTRUCTION.TUNED.CHAT.TEMPLATE.QUESTION.PROMPT.DIRECTORY}/{model}"))
+  }) %>% 
+  bind_rows() %>%
+  dplyr::mutate(prompt.method = "chat.question")
+
+it.chat.template.q.format.df$prompt[1]
+
+# Merge the two DFs
+it.df = bind_rows(it.completion.df, it.chat.template.df, it.chat.template.q.format.df)
+
+# Load model properties
+model.properties = read.csv("open_llm_tom/data/processed/model_properties.csv")
+
+# Bind model properties to main df
+it.df = it.df %>% inner_join(model.properties, by = c("model_path", "model_shorthand"))
+
+it.df %>% pull(model_path) %>% table
+```
+
+## Comparing Logs-Odds
+
+Plotting the log-odds when completion-style prompting is used, vs when the prompt-template is respected
+
+```{r compare.plot, echo=FALSE}
+it.df %>% 
+  dplyr::mutate(model.prompt = glue("{model_shorthand}: {prompt.method}")) %>%
+  dplyr::filter(model_family == "Llama 3") %>%
+  group_by(passage, condition, knowledge_cue, model.prompt) %>%
+  summarise(m_lo = mean(log_odds)) %>%
+  ggplot(aes(x = m_lo,
+             y = model.prompt,
+             fill = condition)) +
+  geom_density_ridges2(aes(height = ..density..), 
+                       color=NA, 
+                       scale=.85, 
+                       # size=1, 
+                       alpha = .8,
+                       stat="density") +
+  labs(x = "Log Odds (Start vs. End)",
+       y = "",
+       fill = "") +
+  theme_minimal() +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  theme(
+    legend.position = "bottom"
+  ) + 
+  theme(axis.title = element_text(size=rel(1.2)),
+        axis.text = element_text(size = rel(1.2)),
+        legend.text = element_text(size = rel(1.2)),
+        legend.title = element_text(size = rel(1.2)),
+        strip.text.x = element_text(size = rel(1.2))) +
+    scale_fill_manual(values = viridisLite::viridis(2, option = "mako", 
+                                                    begin = 0.8, end = 0.15)) +
+  facet_wrap(~knowledge_cue)
+```
