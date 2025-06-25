@@ -10,87 +10,127 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(glue)
-library(pbapply)
-library(irr)
+# library(pbapply)
+# library(irr)
 library(rlang)
+library(lme4)
 library(ggridges)
 library(viridis)
 library(dplyr)
 
-setwd("~/Documents/code/open-ToM-LLM")
 ```
 
-## About
+# Load data
 
 This script compares instruction-tuned models using the original completion-style prompt formatting, vs a prompt format that respects their respective chat-template, as described on each model's HuggingFace page (and stored within each model's tokenizer, as `tokenizer.apply_chat_template`). Ideally, this reformatted prompt template is minimally different from the original completion-style prompt.
 
+
+**TODO**: Also load original models.
+
+## Load prompt-formatted data
+
 ```{r file.load}
-INSTRUCTION.TUNED.COMPLETION.PROMPT.DIRECTORY    = "open_llm_tom/data/processed/fb_local/"
-INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY = "data/instruction-models/fb_local/"
-INSTRUCTION.TUNED.CHAT.TEMPLATE.QUESTION.PROMPT.DIRECTORY = "data/instruction-models/question-format/fb_local/"
+# setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
+directory_path <- "../../data/processed/fb_local_instruction_models/"
+csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
+csv_list <- csv_files %>%
+  map(~ read_csv(.))
+df_all_models <- bind_rows(csv_list) %>%
+  mutate(model_shorthand = str_to_title(model_shorthand)) %>%
+  mutate(prompt_format = "Question")
+nrow(df_all_models)
 
-# Get the names of models where chat-template data exists (a subset of all models run on FB task)
-it.model.names = list.files(
-  path = INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY,
-  pattern = "*.csv",
-  full.names = FALSE
-)
 
-# Read in all CSVs for chat-template data into one CSV
-it.chat.template.df = it.model.names %>% 
-  lapply(function(model) { 
-    read.csv(glue("{INSTRUCTION.TUNED.CHAT.TEMPLATE.PROMPT.DIRECTORY}/{model}"))
-  }) %>% 
-  bind_rows() %>%
-  dplyr::mutate(prompt.method = "chat.template")
+length(unique(df_all_models$model_shorthand))
+table(df_all_models$model_path)
+table(df_all_models$model_shorthand)
 
-it.chat.template.df$prompt[[1]]
 
-# Read in the original data for instruction-models (False Belief ran as a completion model)
-it.completion.df = it.model.names %>% 
-  lapply(function(model) { 
-    read.csv(glue("{INSTRUCTION.TUNED.COMPLETION.PROMPT.DIRECTORY}/{model}"))
-  }) %>% 
-  bind_rows() %>%
-  dplyr::mutate(prompt.method = "completion") %>%
-  dplyr::mutate(prompt = passage)
+### Load #params
+df_model_properties = read_csv("../../data/processed/model_properties.csv") %>% 
+  mutate(model_shorthand = str_to_title(model_shorthand))
+nrow(df_model_properties)
 
-it.completion.df$prompt[1]
+### Load training data
+df_training_data = read_csv("../../data/processed/model_training_data.csv")%>% 
+  mutate(model_shorthand = str_to_title(model_shorthand))
+table(df_training_data$model_shorthand)
 
-# Read in the CSVs for the chat template with question format
-it.chat.template.q.format.df = it.model.names %>%
-  lapply(function(model) { 
-    read.csv(glue("{INSTRUCTION.TUNED.CHAT.TEMPLATE.QUESTION.PROMPT.DIRECTORY}/{model}"))
-  }) %>% 
-  bind_rows() %>%
-  dplyr::mutate(prompt.method = "chat.question")
+### Join
+df_all_properties = df_training_data %>%
+  inner_join(df_model_properties)
 
-it.chat.template.q.format.df$prompt[1]
+table(df_all_properties$model_shorthand)
+nrow(df_all_properties)
 
-# Merge the two DFs
-it.df = bind_rows(it.completion.df, it.chat.template.df, it.chat.template.q.format.df)
 
-# Load model properties
-model.properties = read.csv("open_llm_tom/data/processed/model_properties.csv")
+#### Bind with FB data
+df_all_models = df_all_models %>%
+  inner_join(df_all_properties)
+nrow(df_all_models)
+table(df_all_models$model_shorthand)
 
-# Bind model properties to main df
-it.df = it.df %>% inner_join(model.properties, by = c("model_path", "model_shorthand"))
+df_all_models = df_all_models %>%
+  mutate(model_shorthand = str_to_title(model_shorthand))
 
-it.df %>% pull(model_path) %>% table
+
+length(unique(df_all_models$model_shorthand))
+length(unique(df_all_models$model_family))
+
 ```
+
+## Load original data
+
+```{r}
+# setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
+directory_path <- "../../data/processed/fb_all/"
+csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
+csv_list <- csv_files %>%
+  map(~ read_csv(.))
+df_all_models_og <- bind_rows(csv_list) %>%
+  mutate(model_shorthand = str_to_title(model_shorthand)) %>%
+  mutate(prompt_format = "Completion") %>%
+  filter(model_shorthand %in% unique(df_all_models$model_shorthand))
+nrow(df_all_models_og)
+
+length(unique(df_all_models_og$model_shorthand))
+
+
+
+#### Bind with FB data
+df_all_models_og = df_all_models_og %>%
+  inner_join(df_all_properties)
+nrow(df_all_models_og)
+table(df_all_models_og$model_shorthand)
+
+df_all_models_og = df_all_models_og %>%
+  mutate(model_shorthand = str_to_title(model_shorthand))
+
+
+length(unique(df_all_models_og$model_shorthand))
+length(unique(df_all_models_og$model_family))
+```
+
+## Bind them
+
+```{r}
+df_og_plus_modified = df_all_models %>%
+  bind_rows(df_all_models_og)
+
+nrow(df_og_plus_modified)
+table(df_og_plus_modified$prompt_format)
+```
+
 
 ## Comparing Logs-Odds
 
 Plotting the log-odds when completion-style prompting is used, vs when the prompt-template is respected
 
 ```{r compare.plot, echo=FALSE}
-it.df %>% 
-  dplyr::mutate(model.prompt = glue("{model_shorthand}: {prompt.method}")) %>%
-  dplyr::filter(model_family == "Llama 3") %>%
-  group_by(passage, condition, knowledge_cue, model.prompt) %>%
-  summarise(m_lo = mean(log_odds)) %>%
-  ggplot(aes(x = m_lo,
-             y = model.prompt,
+df_og_plus_modified %>%
+  filter(model_family == "Olmo") %>%
+  ggplot(aes(x = log_odds,
+             y = reorder(model_shorthand, num_params),
              fill = condition)) +
   geom_density_ridges2(aes(height = ..density..), 
                        color=NA, 
@@ -113,5 +153,143 @@ it.df %>%
         strip.text.x = element_text(size = rel(1.2))) +
     scale_fill_manual(values = viridisLite::viridis(2, option = "mako", 
                                                     begin = 0.8, end = 0.15)) +
-  facet_wrap(~knowledge_cue)
+  facet_wrap(~prompt_format)
+
+```
+
+## Accuracy metric
+
+
+```{r}
+df_og_plus_modified = df_og_plus_modified %>%
+  mutate(correct = case_when(
+    condition == "False Belief" & log_odds > 0 ~ TRUE,
+    condition == "True Belief" & log_odds <= 0 ~ TRUE,
+    TRUE ~ FALSE  # all other cases are incorrect
+  ))
+
+
+df_summ = df_og_plus_modified %>%
+  group_by(model_path, model_shorthand, model_family,
+           num_params, num_training_tokens, prompt_format) %>%
+  summarise(mean_accuracy = mean(correct))
+df_summ %>%
+  select(model_shorthand, mean_accuracy)
+mean(df_og_plus_modified$correct)
+
+df_summ %>%
+  ungroup() %>%
+  arrange(desc(mean_accuracy)) %>%
+  select(model_shorthand, mean_accuracy, prompt_format) %>%
+  head(5)
+
+
+### "Wisdom of the crowd"?
+df_lo_avg = df_og_plus_modified %>%
+  group_by(passage, condition) %>%
+  summarise(m_lo = mean(log_odds)) %>%
+  mutate(correct = case_when(
+    condition == "False Belief" & m_lo > 0 ~ TRUE,
+    condition == "True Belief" & m_lo <= 0 ~ TRUE,
+    TRUE ~ FALSE  # all other cases are incorrect
+  )) 
+mean(df_lo_avg$correct)
+
+
+
+df_summ %>%
+  ggplot(aes(x = num_params,
+             y = mean_accuracy,
+             color = model_family,
+             shape = prompt_format)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  geom_hline(yintercept = .83,##TODO: Calculate from scratch
+             linetype = "dotted", color = "red",
+             size = 1.2, alpha = .8) + 
+    geom_hline(yintercept = .9,##TODO: Calculate from scratch
+             linetype = "dotted", color = "blue",
+             size = 1.2, alpha = .8) + 
+  geom_hline(yintercept = .5, linetype = "dotted",
+             size = 1.2, alpha = .5) +
+  scale_x_log10() +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "Parameters",
+       y = "Accuracy",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") +
+  guides(color = "none")
+
+df_summ %>%
+  ggplot(aes(x = num_training_tokens,
+             y = mean_accuracy,
+             color = model_family,
+             shape = prompt_format)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  geom_hline(yintercept = .83,##TODO: Calculate from scratch
+             linetype = "dotted", color = "red",
+             size = 1.2, alpha = .8) + 
+  geom_hline(yintercept = .5, linetype = "dotted",
+             size = 1.2, alpha = .5) +
+    geom_hline(yintercept = .9,##TODO: Calculate from scratch
+             linetype = "dotted", color = "blue",
+             size = 1.2, alpha = .8) + 
+  scale_x_log10() +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "#Training Tokens",
+       y = "Accuracy",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") +
+  guides(color = "none")
+
+
+
+### How do model properties predict the probability of a correct response?
+mod_full = glmer(data = df_og_plus_modified,
+                 correct ~ condition + knowledge_cue  +
+                   log10(num_params) + log10(num_training_tokens) + 
+                  prompt_format + 
+                   (1 | start) + (1|model_family), 
+                 family = binomial())
+summary(mod_full)
+
+
+### Descriptive stats
+df_og_plus_modified %>%
+  group_by(prompt_format) %>%
+  summarise(mean_accuracy = mean(correct))
+
+
+### Plot coefficients
+df_coef <- broom.mixed::tidy(mod_full, effects = "fixed") %>%
+  mutate(term = forcats::fct_reorder(term, estimate))
+
+
+df_coef %>%
+  filter(term != "(Intercept)") %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error),
+                width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray40") +
+  coord_flip() +
+  labs(
+    x = NULL, y = "Coefficient Estimate",
+  ) +
+  theme_minimal(base_size = 12)
+
+
 ```
