@@ -57,10 +57,10 @@ MODELS = {
     "Qwen/Qwen2.5-32B-Instruct": "Qwen 2.5 32B Instruct",
 
     ### Gemma (needs authentication)
-    # "google/gemma-2b": "Gemma 2 2B",
-    # "google/gemma-2b-it": "Gemma 2 2B Instruct",
-    "google/gemma-7b": "Gemma 2 7B",
-    "google/gemma-7b-it": "Gemma 2 7B Instruct",
+    # "google/gemma-2b": "Gemma 1 2B",
+    # "google/gemma-2b-it": "Gemma 1 2B Instruct",
+    "google/gemma-7b": "Gemma 1 7B",
+    "google/gemma-7b-it": "Gemma 1 7B Instruct",
 
 
     ### LLama 3 (needs authentication)

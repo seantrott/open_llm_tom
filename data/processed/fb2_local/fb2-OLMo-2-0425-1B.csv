@@ -1,0 +1,377 @@
+yes_prob,no_prob,passage,item,knowledge_cue,log_odds,condition,model_path,model_shorthand
+0.20243868231773376,0.26123979687690735,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+You fill up the tank, and then the two of you go inside the gas station to buy some water and snacks. When you return to the car and start up the engine, you and Jonathan both notice with some dismay a blinking light, which indicates that the car's heating system is broken. You both bundle up.
+ 
+As you leave the station, Jonathan shivers in his seat.",1,explicit,-0.36788970268991383,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2025742381811142,0.26960617303848267,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+You fill up the tank, and then the two of you go inside the gas station to buy some water and snacks. When you return to the car and start up the engine, you and Jonathan notice with some dismay a blinking light, which indicates that the car's heating system is broken. You both bundle up.
+ 
+As you leave the station, Jonathan shivers in his seat.",1,implicit,-0.4124028145193063,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.14833158254623413,0.22845332324504852,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+While you fill up the tank, Jonathan goes inside to buy some water and snacks. As you're checking the meter, you notice with some dismay a blinking light, which indicates that the car's heating system is broken. You finish filling up the gas and wait for Jonathan, who is still inside and doesn't know about the broken heater.
+ 
+Jonathan returns with some snacks, and you both set off. As you leave the station, he shivers in his seat. ",1,explicit,-0.6230736221279167,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.10393010824918747,0.16999000310897827,"You and your friend Jonathan are taking a road trip. You began in California, and are now passing through Michigan. It's almost winter, so it's very cold outside - especially for Southern California dwellers like you and Jonathan. You see that you're almost out of gas, so you stop at a gas station in a small town.
+ 
+While you fill up the tank, Jonathan goes inside to buy some water and snacks. As you're checking the meter, you notice with some dismay a blinking light, which indicates that the car's heating system is broken. You finish filling up the gas and wait for Jonathan.
+ 
+Jonathan returns with some snacks, and you both set off. As you leave the station, he shivers in his seat. ",1,implicit,-0.7098362465010437,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22332613170146942,0.14328907430171967,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, during a house meeting with you and Brian, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening. Brian seems satisfied by this plan.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,explicit,0.6402234635524899,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2358245551586151,0.16210758686065674,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, during a house meeting with you and Brian, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,implicit,0.5407623337412947,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.1962357461452484,0.14704804122447968,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening. Brian was still sleeping, so he's unaware of this plan.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,explicit,0.41630029894388687,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.21305565536022186,0.14039908349514008,"You've been renting a house with your two roommates, Lisa and Brian, for three months now. Things are going well, though both you and Lisa are not very responsible about cleaning; consequently, the house has a tendency to get dirty quickly - unwashed dishes in the sink, cluttered counters, the whole shebang.
+ 
+Even worse, you and Lisa are directly responsible for the latest mess, which is the product of a recent dinner party. Brian's something of a neat freak, so he's pretty anxious about the mess.
+ 
+This morning, Lisa volunteered to take the lead on cleaning the kitchen when she gets home from work this evening.
+ 
+In the afternoon, while Lisa is still at work, you and Brian are standing in the kitchen doorway, gazing in.",2,implicit,0.6016968290262392,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.28938084840774536,0.23583576083183289,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+When Sarah sits down, you flip through the pamphlet together; you're both surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah seems saddened by the news.
+ 
+About five minutes later, your food is served. ",3,explicit,0.2951869484272391,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.29108256101608276,0.26035383343696594,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+When Sarah sits down, you flip through the pamphlet together; you're both surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes.
+ 
+About five minutes later, your food is served. ",3,implicit,0.1609547600063517,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.23299306631088257,0.3395526707172394,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+While Sarah is washing her hands in the restroom, you flip through the pamphlet; you're surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah returns to the table, unaware that she's allergic to potatoes.
+ 
+About five minutes later, your food is served.",3,explicit,-0.543348357682094,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.27851584553718567,0.3187642991542816,"You accompany your teenage daughter, Sarah, to the doctor so that she can be tested for allergies. She's quite reluctant to go, but you promise her that after the appointment, you can go out to her favorite hamburger joint. The appointment goes well, and is very informative; as it turns out, Sarah does have several major food allergies. The doctor gives you a pamphlet containing more detailed information. Then, as promised, you take Sarah to a nearby diner to buy some hamburgers. You order a hamburger and some fries for yourself, a cheeseburger for Sarah, then sit down.
+ 
+While Sarah is washing her hands in the restroom, you flip through the pamphlet; you're surprised to learn that she's allergic to members of the ""nightshade"" family, which includes eggplant and potatoes. Sarah returns to the table.
+ 
+About five minutes later, your food is served.",3,implicit,-0.19473065113847485,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.30748897790908813,0.35732555389404297,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by the same guest's table. He is staring down at his meal with irritation. You pass by and he recognizes you as the guest from the line, whom he'd formerly mistaken for a waiter.",4,explicit,-0.21670439368927547,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.23715652525424957,0.4198082685470581,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by the same guest's table. He is staring down at his meal with irritation. You pass by.",4,implicit,-0.8238910181797368,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2539008557796478,0.40534570813179016,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by another guest's table. He is staring down at his meal with irritation. As you pass by, he looks up at you and catches your eye.",4,explicit,-0.6748876100185952,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2539008557796478,0.40534570813179016,"After a long week, you decide to treat yourself to a dinner for one at the fanciest restaurant in town. Just for the occasion, you break out your black and white tuxedo. Your spirits are high, but when you arrive at the restaurant, you're somewhat embarrassed to realize that you're wearing the exact same outfit as the restaurant's waitstaff.
+ 
+While you're waiting in line, you encounter another guest, who initially mistakes you for a waiter. You laugh about the misunderstanding, and then an actual waiter shows you to your table.
+ 
+Later, as you walk to the kitchen to pay your compliments to the chef, you pass by another guest's table. He is staring down at his meal with irritation. As you pass by, he looks up at you and catches your eye.",4,implicit,-0.6748876100185952,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2259722352027893,0.13363578915596008,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+With your dad's encouragement, she calls a painting company to come and paint the fence; they schedule a time two days from now. This seems to satisfy your dad.
+ 
+Later in the day, you're reading in the living room. Your dad walks in and peers out the window with a slightly displeased expression on his face.",5,explicit,0.7578390928224743,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22636187076568604,0.12018054723739624,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+With your dad's encouragement, she calls a painting company to come and paint the fence; they schedule a time two days from now.
+ 
+Later in the day, you're reading in the living room. Your dad walks in and peers out the window with a slightly displeased expression on his face.",5,implicit,0.9134275694685272,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.19825775921344757,0.15120252966880798,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+While your dad's away at work, she calls a painting company to come and paint the fence; they schedule a time two days from now. Unfortunately, your dad hasn't yet heard about this plan.
+ 
+Later in the day, you're reading in the living room when your dad returns from work. He walks in and peers out the window with a slightly displeased expression on his face.",5,explicit,0.3908950532558876,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22212199866771698,0.12351919710636139,"After your first year of college, you move back home for the summer. Your parents are glad to have you home, but your dad insists that you do some weekly chores to ""earn your keep"". You'd prefer to just relax, but it does keep you occupied, which isn't all bad.  Besides, the house is in need of some repairs; your parents are both busy people, so some chores have fallen by the wayside while you've been away. Most notably, the lawn has gotten overgrown, and the paint on the backyard fence is beginning to peel. During the first couple of weeks, you mow the lawn, rake the driveway, and water the garden, but you keep putting off painting the fence.
+ 
+One day, your mom decides to take matter into her own hands.
+ 
+While your dad's away at work, she calls a painting company to come and paint the fence; they schedule a time two days from now.
+ 
+Later in the day, you're reading in the living room when your dad returns from work. He walks in and peers out the window with a slightly displeased expression on his face.",5,implicit,0.8466170025503281,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22157518565654755,0.2969639003276825,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you both see a notice taped to your apartment door: unfortunately, the water in your apartment building will be shut off for the next 24 hours. Your friend seems disconcerted by the news.",6,explicit,-0.42249124196310084,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2130359709262848,0.3044075667858124,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you both see a notice taped to your apartment door: unfortunately, the water in your apartment building will be shut off for the next 24 hours.",6,implicit,-0.5149071722194937,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.1676660180091858,0.35405290126800537,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you go to your room, and privately check your email. You see that your landlord has sent you a message: unfortunately, the water in your apartment building will be shut off for the next 24 hours. Your friend, of course, doesn't know about this yet.",6,explicit,-1.0783746206449774,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2326488345861435,0.3431345820426941,"You and your friend are exhausted and sweaty from playing tennis. After playing, you invite him back to your apartment to hang out.
+ 
+When you return to your apartment, you go to your room, and privately check your email. You see that your landlord has sent you a message: unfortunately, the water in your apartment building will be shut off for the next 24 hours.",6,implicit,-0.560620571795799,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.20832990109920502,0.18062399327754974,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+Sadly, you call out from the kitchen that the wine is all gone. Your date murmurs something in reply, sounding disappointed.
+ 
+When you return to the dining room, your date sips the last of her glass of wine. ",7,explicit,0.20588037419732091,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.21562044322490692,0.22241078317165375,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+Sadly, you call out from the kitchen that the wine is all gone.
+ 
+When you return to the dining room, your date sips the last of her glass of wine. ",7,implicit,-0.04473276796383401,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.26259082555770874,0.27657002210617065,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+You walk back towards the dining room, unsure about what to tell your date, who doesn't yet know that there's no more wine.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,explicit,-0.07482827680999389,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.27188360691070557,0.2412814348936081,"After some deliberation, you invite a new acquaintance over for a dinner date. You prepare a feast, which you serve alongside some red wine. There's only a small amount of wine left in the bottle, but you assure your date you have another bottle stashed away, which you can open if she likes this wine.
+ 
+About halfway through dinner, you excuse yourself to go to the bathroom. On the way back, you stop in the kitchen to grab the other bottle of wine. You're surprised and irritated to find that there is no other bottle; you must have been mistaken.
+ 
+You walk back towards the dining room, unsure about what to tell your date.
+ 
+When you return to the dining room, your date sips the last of her glass of wine.",7,implicit,0.1722722539823068,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.36495786905288696,0.2383931279182434,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at nearby coffee shop.
+ 
+While you and Rob are sitting talking, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. Rob knows how much you rely on that car, so he understands your frustration.
+ 
+Once the mechanic leaves, you and Rob get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,explicit,0.6143872797613318,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.34131836891174316,0.2535404860973358,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at nearby coffee shop.
+ 
+While you and Rob are sitting talking, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week.
+ 
+Once the mechanic leaves, you and Rob get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,implicit,0.42890191936048216,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.32462674379348755,0.26679548621177673,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at a nearby coffee shop.
+ 
+Before you sit down, Rob steps outside to take a phone call. While he's outside, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. You rely on that car, so this is very frustrating.
+ 
+Anyway, Rob finishes his phone call and returns to the table, and you both get to talking. Rob realizes you've both been invited to the same party later on in the week, but missed the conversation with your mechanic about your car still being in the shop.",8,explicit,0.2830476001863152,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.31601619720458984,0.25172683596611023,"You and your friend Rob get along well; your only complaint is that since he doesn't have a car, you almost always have to pick him up and give him rides. Whenever you're both going somewhere, it's generally expected that you'll drive him - but he treats you to coffee sometimes, so it all evens out.
+ 
+One day, after classes get out, you walk together to get some coffee at a nearby coffee shop.
+ 
+Before you sit down, Rob steps outside to take a phone call. While he's outside, you're surprised to see your mechanic at the coffee shop. He walks up and informs you that your car, which you recently took in for a tune-up, will be under repair for at least another week. You rely on that car, so this is very frustrating.
+ 
+Anyway, Rob finishes his phone call and returns to the table, and you both get to talking. Rob realizes you've both been invited to the same party later on in the week.",8,implicit,0.32813947789851144,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.16078053414821625,0.14002898335456848,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, you arrive at the theater at the same time as your friend. You greet each other, then head towards the pay-stand. As you walk together, you check your pockets; you realize you don't have any cash, and you left your credit card at home. You curse, saying, ""I can't believe I left my wallet at home."" Your friend looks surprised that you forgot your money, since that is very unlike you. 
+
+Then, just as your friend is about to pay, her face suddenly falls. She groans, then turns back to you in disbelief. ",9,explicit,0.19936727993199757,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22625315189361572,0.2248217910528183,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, you arrive at the theater at the same time as your friend. You greet each other, then head towards the pay-stand. As you walk together, you check your pockets; you realize you don't have any cash, and you left your credit card at home. You curse, saying, ""I can't believe I left my wallet at home.""
+
+Then, just as your friend is about to pay, her face suddenly falls. She groans, then turns back to you in disbelief. ",9,implicit,0.009156013430548185,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.16396470367908478,0.13744790852069855,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, just after you arrive at the theater, you realize you don't have any cash on you, and you left your credit card at home. You curse, saying to yourself, ""I can't believe I left my wallet at home."" 
+
+Your friend shows up just after your realization, greets you, and heads right to the pay-stand, not yet aware that you don't have any money. 
+
+As your friend is about to pay, her face suddenly falls. She groans, then turns back to you sheepishly. ",9,explicit,0.25450032826433816,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2642921805381775,0.2321135550737381,"After a relatively uneventful day, you decide you need to get out and see a movie. You call up your best friend, who agrees to accompany you. 
+
+Later, just after you arrive at the theater, you realize you don't have any cash on you, and you left your credit card at home. You curse, saying to yourself, ""I can't believe I left my wallet at home."" 
+
+Your friend shows up just after your realization, greets you, and heads right to the pay-stand.
+
+As your friend is about to pay, her face suddenly falls. She groans, then turns back to you sheepishly. ",9,implicit,0.18730296510801095,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.18370433151721954,0.11825401335954666,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Feeling a thirst coming on, you head into the kitchen, closely followed by your friend. You check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself; your friend watches and shakes his head disapprovingly, seeing that there are no beers left. 
+
+Later, back in the living room, you drain your beer and set it down on the table. Your friend smacks his lips.",10,explicit,0.6354964965369827,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.24441568553447723,0.20476862788200378,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Feeling a thirst coming on, you head into the kitchen, closely followed by your friend. You check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself; your friend watches and shakes his head disapprovingly.
+
+Later, back in the living room, you drain your beer and set it down on the table. Your friend smacks his lips.",10,implicit,0.2553421736464547,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.06170590594410896,0.061184920370578766,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Your friend collapses onto the couch, breathing a sigh of relief. Feeling a thirst coming on, you head into the kitchen and check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself. 
+
+You return to the living room. Your friend sees you holding the beer, but isn't aware that there are no more left. ",10,explicit,0.012232447755241039,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.11664630472660065,0.08766192942857742,"The roof of your garage is in bad shape. Fortunately, one of your good friends generously offers to come over and help you fix it up. 
+
+The two of you spend the day toiling under the hot sun, working up a sweat. It takes a few hours, but eventually, the roof starts looking somewhat decent. 
+
+You both go inside the house, where fortunately, the AC is on. Your friend collapses onto the couch, breathing a sigh of relief. Feeling a thirst coming on, you head into the kitchen and check the refrigerator, and find that there's one beer left. A little guilty, you take it for yourself. 
+
+You return to the living room. Your friend sees you holding the beer.",10,implicit,0.41211826660567824,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.1173216924071312,0.06504520028829575,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+You all gather together in your usual spots: you sit in a chair closest to the television, and your parents sit on the couch. But when you turn on the TV, there's a crackling noise from the speakers. After some fiddling around, you all realize that they're broken. 
+
+Still, you decide to watch anyway, using the built-in speakers on the TV. The show starts, but the built-in speakers just don't project at all. 
+
+Your father groans and looks over at you. ",11,explicit,0.8509552788153755,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.12635423243045807,0.07520407438278198,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+You all gather together in your usual spots: you sit in a chair closest to the television, and your parents sit on the couch. But when you turn on the TV, there's a crackling noise from the speakers. After some fiddling around, you realize that they're broken. 
+
+Still, you decide to watch anyway, using the built-in speakers on the TV. The show starts, but the built-in speakers just don't project at all. 
+
+Your father groans and looks over at you. ",11,implicit,0.7485912593811053,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.12291138619184494,0.07563567906618118,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+Before your parents arrive, you get settled in your usual spot: the chair closest to the television. But when you turn on the TV, there's a crackling noise from the speakers. You realize that they're broken, so you decide to just use the built-in speakers on the TV. 
+
+Later, your parents come into the room and sit on the couch. The show starts, but the built-in speakers just don't project at all. Your parents don't realize that this is the loudest it will get, since the other speakers are broken. 
+
+Your father groans and looks over at you. ",11,explicit,0.7004797173113404,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.18254584074020386,0.14183488488197327,"It's Monday evening, which is when you and your parents ordinarily watch your favorite television series. 
+
+Before your parents arrive, you get settled in your usual spot: the chair closest to the television. But when you turn on the TV, there's a crackling noise from the speakers. You realize that they're broken, so you decide to just use the built-in speakers on the TV. 
+
+Later, your parents come into the room and sit on the couch. The show starts, but the built-in speakers just don't project at all.
+
+Your father groans and looks over at you. ",11,implicit,0.36404638462499583,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.17200200259685516,0.12410648167133331,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, you and Claire both run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. You and Claire both know you'll have to wait to empty it until the services start up again. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head.",12,explicit,0.47084689750571584,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.21112920343875885,0.19649870693683624,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, you and Claire both run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off.
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head.",12,implicit,0.10360632755377554,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.1176113560795784,0.07283821702003479,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, while Claire is away, you run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. You're pretty forgetful though, so it slips your mind when Claire gets home later; thus, she doesn't know that there's nowhere to empty the bin. 
+
+A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head. ",12,explicit,0.6912598550738126,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.16363142430782318,0.10912700742483139,"You and your friend Claire just got a new apartment in a nice area of town. You're good roommates: you both do your dishes, keep things tidy, and take turns taking out the trash and recycling. 
+
+One day, however, while Claire is away, you run into your landlord, who gives you some surprising news: the town's recycling services are temporarily suspended. You're pretty forgetful though, so it slips your mind when Claire gets home later.
+
+A few days go by, and your recycling bin starts to overflow. It's your turn to empty the bin, but unfortunately, there's nowhere to drop it off. 
+
+While she's washing the dishes, Claire looks over at the recycling bin and shakes her head. ",12,implicit,0.584441641790014,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2937808036804199,0.21886217594146729,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. 
+
+One afternoon, a familiar-looking customer enters the store. Just as he approaches the counter, you both hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" The customer looks disappointed when he hears this. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,explicit,0.42471748238705453,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.33140823245048523,0.23463983833789825,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. 
+
+One afternoon, a familiar-looking customer enters the store. Just as he approaches the counter, you both hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,implicit,0.4981614585044877,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.3261803686618805,0.21704047918319702,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. One afternoon, the cafe runs out especially early, and you hear a shout from the back room: ""Hey, we're out of chocolate croissants!"" 
+
+Soon after, a familiar-looking customer enters the store, unaware that you've just run out of the most popular item. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,explicit,0.5877058173718424,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.44008731842041016,0.26861727237701416,"After several weeks of looking for work, you finally find a job at a local cafe. You quickly learn the basics: taking orders from customers, how to prepare different drinks, and even which items are the most popular. 
+
+Customers especially love the chocolate croissants, but the baker stops making new ones by noon, so these are often in short supply. One afternoon, the cafe runs out especially early, and you hear a shout from the back room: ""Hey, we're out of chocolate croissants!""
+
+Soon after, a familiar-looking customer enters the store. You exchange pleasantries. He looks up at the menu and his eyes alight on the pastry section. ",13,implicit,0.7122377249770282,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.14776968955993652,0.06694065779447556,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. You text a couple of your friends, including Harold, that you are having a really hard time and won't be able to complete the work. 
+
+The next day, Harold approaches you before class. He knows that you weren't able to finish the homework. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,explicit,1.1423957420962083,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.13124634325504303,0.06902938336133957,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. You text a couple of your friends, including Harold, that you are having a really hard time and won't be able to complete the work. 
+
+The next day, Harold approaches you before class. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,implicit,0.9269947255406967,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.19824327528476715,0.12994448840618134,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. 
+
+The next day, Harold approaches you before class. He doesn't know that you struggled with the homework, assuming that, as usual, you completed all of it. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,explicit,0.6093764851199488,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.16452020406723022,0.08787399530410767,"In college, you decide to take a particularly challenging mathematics course. Many of the other students struggle with the homework, but you find that you can usually get it, as long as you work hard at it. 
+
+Harold, one of the other students, consistently struggles with understanding the concepts. You feel bad, so you often help him with his homework in the morning before class. 
+
+One night, though, you are completely lost. None of the concepts make sense, and you don't manage to answer a single homework problem. 
+
+The next day, Harold approaches you before class. He pulls out a piece of paper with some half-hearted scribbles on it, but it's clear he didn't get very far. ",14,implicit,0.9047565719130718,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.3854563534259796,0.15788204967975616,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One evening, after Terry has returned home, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. With Terry watching, you make an appointment for someone to come fix the machine. 
+
+Terry knows that you made an appointment to fix the broken washing machine, and seems satisfied. The laundry hamper is growing ominously large at this point.  ",15,explicit,1.2877203539373985,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.2842336893081665,0.2034069001674652,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One evening, after Terry has returned home, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. With Terry watching, you make an appointment for someone to come fix the machine. 
+
+The laundry hamper is growing ominously large at this point.  ",15,implicit,0.48270894219918314,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.16111013293266296,0.10806836187839508,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One day, while Terry is at work, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. You make an appointment for someone to come fix the machine. 
+
+Soon after, Terry returns home exhausted, and also not yet realizing that the washing machine is broken. The laundry hamper is growing ominously large at this point. ",15,explicit,0.5761030132919022,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.17970891296863556,0.10585565119981766,"Your spouse, Terry, has been very busy recently with extra long days at work, coming home late in the evening. 
+
+As a consequence, laundry has started to pile up, which Terry doesn't really have the time to do. One day, while Terry is at work, you decide it's time to make a dent in some of the laundry. But when you try to turn on the washing machine, you realize that it is broken. You make an appointment for someone to come fix the machine. 
+
+Soon after, Terry returns home exhausted. The laundry hamper is growing ominously large at this point. ",15,implicit,0.7635636725492354,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.11658966541290283,0.08406244963407516,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is helping you carry your mattress into your bedroom, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Knowing you are hurt, Paul finishes pushing the mattress into the room. 
+
+The two of you go back outside, and see Paul's gargantuan desk sitting in the driveway. Paul looks at the desk doubtfully. ",16,explicit,0.4719065094575631,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.1198076605796814,0.08062975108623505,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is helping you carry your mattress into your bedroom, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Paul finishes pushing the mattress into the room. 
+
+The two of you go back outside, and see Paul's gargantuan desk sitting in the driveway. Paul looks at the desk doubtfully. ",16,implicit,0.5713359844795547,aware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.07768533378839493,0.06859120726585388,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is still outside and you are carrying your mattress into your room, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture. Paul, however, didn't see what happened, so he doesn't know that you are hurt. 
+
+When you go back outside, you see that Paul is still out front, looking at his gargantuan desk. ",16,explicit,0.17961860939095597,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B
+0.22580505907535553,0.2410363107919693,"You and your friend Paul are moving into a new apartment. There's a ton of stuff to unload: pots and pans, furniture, miscellaneous belongings, and more. Most of it is light, but some of the furniture is quite heavy. For the heavy stuff, you agree to help each other out. 
+
+At one point, while Paul is still outside and you are carrying your mattress into your room, you suddenly feel a jolt of sharp pain in your back. You inadvertently gasp and clutch your back. Once you recover, you decide you should take it easy the rest of the day and not pick up any more heavy furniture.
+
+When you go back outside, you see that Paul is still out front, looking at his gargantuan desk. ",16,implicit,-0.09417268738518991,unaware,allenai/OLMo-2-0425-1B,OLMO 2 1B

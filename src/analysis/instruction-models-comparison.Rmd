@@ -2,7 +2,11 @@
 title: "Instruction Model Comparison: False Belief"
 author: "Samuel Taylor"
 date: "2025-06-18"
-output: html_document
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -25,16 +29,14 @@ library(dplyr)
 This script compares instruction-tuned models using the original completion-style prompt formatting, vs a prompt format that respects their respective chat-template, as described on each model's HuggingFace page (and stored within each model's tokenizer, as `tokenizer.apply_chat_template`). Ideally, this reformatted prompt template is minimally different from the original completion-style prompt.
 
 
-**TODO**: Also load original models.
-
 ## Load prompt-formatted data
 
 ```{r file.load}
 # setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
 directory_path <- "../../data/processed/fb_local_instruction_models/"
 csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
-csv_list <- csv_files %>%
-  map(~ read_csv(.))
+csv_list <- map(csv_files, read_csv)
+
 df_all_models <- bind_rows(csv_list) %>%
   mutate(model_shorthand = str_to_title(model_shorthand)) %>%
   mutate(prompt_format = "Question")
@@ -207,9 +209,6 @@ df_summ %>%
   geom_hline(yintercept = .83,##TODO: Calculate from scratch
              linetype = "dotted", color = "red",
              size = 1.2, alpha = .8) + 
-    geom_hline(yintercept = .9,##TODO: Calculate from scratch
-             linetype = "dotted", color = "blue",
-             size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
   scale_x_log10() +
@@ -238,9 +237,7 @@ df_summ %>%
              size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
-    geom_hline(yintercept = .9,##TODO: Calculate from scratch
-             linetype = "dotted", color = "blue",
-             size = 1.2, alpha = .8) + 
+
   scale_x_log10() +
   # geom_text_repel(aes(label=model_shorthand), size=3) +
   scale_y_continuous(limits = c(0, 1)) +
@@ -265,6 +262,35 @@ mod_full = glmer(data = df_og_plus_modified,
                    (1 | start) + (1|model_family), 
                  family = binomial())
 summary(mod_full)
+
+
+### lmer version with just prompt_format
+summary(lmer(data = df_summ,
+           mean_accuracy ~ prompt_format + (1|model_shorthand)))
+
+
+
+
+# Plot with error bars and raw points
+set.seed(1)
+plot_data <- df_summ %>%
+  group_by(prompt_format) %>%
+  summarise(
+    mean_acc = mean(mean_accuracy),
+    se = sd(mean_accuracy) / sqrt(n()),
+    .groups = "drop"
+  )
+ggplot(plot_data, aes(x = prompt_format, y = mean_acc)) +
+  geom_point(size = 4, color = "steelblue") +
+  geom_errorbar(aes(ymin = mean_acc - se, ymax = mean_acc + se), 
+                width = 0.2, linewidth = 1, color = "steelblue") +
+  geom_jitter(data = df_summ, 
+              aes(x = prompt_format, y = mean_accuracy),
+              width = 0.15, alpha = 0.3, size = 2, color = "gray40") +
+  theme_minimal() +
+  labs(x = "Prompt Format",
+       y = "Mean Accuracy") +
+  theme(text = element_text(size = 15))
 
 
 ### Descriptive stats

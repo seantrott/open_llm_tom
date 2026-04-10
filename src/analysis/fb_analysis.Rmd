@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(dpi = 300, fig.format = "png")
+knitr::opts_chunk$set(dpi = 300, fig.format = "pdf")
 ```
 
 
@@ -34,7 +34,7 @@ my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palett
 
 ```{r}
 # setwd("/Users/seantrott/Dropbox/UCSD/Research/NLMs/open_llm_tom/src/analysis")
-directory_path <- "../../data/processed/fb_all/"
+directory_path <- "../../data/processed/fb_local/"
 csv_files <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
 csv_list <- csv_files %>%
   map(~ read_csv(.))
@@ -80,6 +80,14 @@ df_all_models = df_all_models %>%
 length(unique(df_all_models$model_shorthand))
 length(unique(df_all_models$model_family))
 
+
+
+df_all_models <- df_all_models %>%
+  mutate(model_shorthand = recode(model_shorthand,
+    "Gemma 2 2b"          = "Gemma 1 2b",
+    "Gemma 2 2b Instruct" = "Gemma 1 2b Instruct"
+  ))
+
 ```
 
 
@@ -87,7 +95,7 @@ length(unique(df_all_models$model_family))
 
 ## Sensitivity to mental states
 
-```{r}
+```{r sensitivity}
 ### Visualization
 df_all_models %>%
   ggplot(aes(x = log_odds,
@@ -269,13 +277,14 @@ anova(mod_full, mod_reduced)
 ## Accuracy metric
 
 
-```{r}
+```{r accuracy}
 df_all_models = df_all_models %>%
   mutate(correct = case_when(
     condition == "False Belief" & log_odds > 0 ~ TRUE,
     condition == "True Belief" & log_odds <= 0 ~ TRUE,
     TRUE ~ FALSE  # all other cases are incorrect
   ))
+
 
 
 df_summ = df_all_models %>%
@@ -316,23 +325,22 @@ df_summ %>%
   geom_hline(yintercept = .83,##TODO: Calculate from scratch
              linetype = "dotted", color = "red",
              size = 1.2, alpha = .8) + 
-    geom_hline(yintercept = .9,##TODO: Calculate from scratch
-             linetype = "dotted", color = "blue",
-             size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
   scale_x_log10() +
   # geom_text_repel(aes(label=model_shorthand), size=3) +
   scale_y_continuous(limits = c(0, 1)) +
-  labs(x = "Parameters",
+  labs(x = "#Parameters (Log10)",
        y = "Accuracy",
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
-        legend.position="bottom")
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
 
 df_summ %>%
   ggplot(aes(x = num_training_tokens,
@@ -346,9 +354,6 @@ df_summ %>%
              size = 1.2, alpha = .8) + 
   geom_hline(yintercept = .5, linetype = "dotted",
              size = 1.2, alpha = .5) +
-    geom_hline(yintercept = .9,##TODO: Calculate from scratch
-             linetype = "dotted", color = "blue",
-             size = 1.2, alpha = .8) + 
   scale_x_log10() +
   # geom_text_repel(aes(label=model_shorthand), size=3) +
   scale_y_continuous(limits = c(0, 1)) +
@@ -357,10 +362,12 @@ df_summ %>%
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
-        legend.position="bottom")
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
 
 
 
@@ -368,7 +375,7 @@ df_summ %>%
 mod_full = glmer(data = df_all_models,
                  correct ~ condition + knowledge_cue  +
                    log10(num_params) + log10(num_training_tokens) + 
-                  base_instruct + 
+                  base_instruct + first_mention + recent_mention +
                    (1 | start) + (1|model_family), 
                  family = binomial())
 summary(mod_full)
@@ -395,29 +402,22 @@ df_coef %>%
 
 
 write.csv(df_summ, "../../data/processed/summaries/fb_summary.csv")
-```
 
-## Item-wise analysis
 
-```{r}
-df_item_accuracy = df_all_models %>%
-  group_by(start) %>%
-  summarise(mean_accuracy = mean(correct)) %>%
-  arrange(mean_accuracy)
+### Using accuracy instead of binary correct/incorrect response
 
-df_item_accuracy %>%
-  ggplot(aes(x = reorder(start, mean_accuracy), y = mean_accuracy)) +
-  geom_bar(stat = "identity", alpha = .6) +
-  labs(x = "Item",
-       y = "Mean Accuracy",
-       color = "",
-       shape = "") +
-  theme_minimal() +
-  geom_hline(linetype = "dotted", yintercept = .5) +
-  coord_flip() +
-  theme(text = element_text(size = 15),
-        legend.position="bottom")
-  
+### Just individual predictors
+summary(lm(data = df_summ,
+           mean_accuracy ~ log10(num_params)))
+summary(lm(data = df_summ,
+           mean_accuracy ~ log10(num_training_tokens)))
+summary(lm(data = df_summ,
+           mean_accuracy ~ base_instruct))
+
+### All together
+summary(lm(data = df_summ,
+           mean_accuracy ~ log10(num_params) + log10(num_training_tokens) + base_instruct))
+
 ```
 
 
@@ -457,7 +457,7 @@ df_merged = df_all_models %>%
 
 ## Top-performing models
 
-```{r}
+```{r best_models}
 df_merged %>%
   filter(model_shorthand %in% c("Human",
                                 "Olmo 2 13b Dpo",
@@ -489,7 +489,7 @@ df_merged %>%
         strip.text.x = element_text(size = rel(1.2))) +
     scale_fill_manual(values = viridisLite::viridis(2, option = "mako", 
                                                     begin = 0.8, end = 0.15)) +
-  facet_wrap(~knowledge_cue)
+  facet_wrap(~knowledge_cue) 
 
 ```
 
@@ -497,15 +497,11 @@ df_merged %>%
 
 ## Correlation matrix
 
-```{r}
+```{r corr_matrix}
 df_model_means = df_all_models %>%
   group_by(passage, condition, knowledge_cue) %>%
   summarise(log_odds = mean(log_odds)) %>%
   mutate(model_shorthand = "All Models")
-
-# df_merged = df_merged %>%
-#   bind_rows(df_model_means)
-
 
 df_wide <- df_merged %>%
   select(passage, model_shorthand, log_odds) %>%
@@ -514,13 +510,11 @@ df_wide <- df_merged %>%
 cor_matrix <- df_wide %>%
   select(-passage) %>%
   cor(use = "pairwise.complete.obs")
-cor_matrix
 
 # Plot the correlation matrix
 ggcorrplot(cor_matrix, 
            hc.order = FALSE,
-           method = "square" 
-          ) +
+           method = "square") +
   theme(
     axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
     axis.text.y = element_text(size = 6)
@@ -528,13 +522,16 @@ ggcorrplot(cor_matrix,
 
 sort(cor_matrix["Human",])
 
+### MDS - EXCLUDE HUMAN
+# Remove Human from correlation matrix for MDS
+cor_matrix_no_human <- cor_matrix[rownames(cor_matrix) != "Human", 
+                                   colnames(cor_matrix) != "Human"]
 
-### MDS
 # Convert correlation matrix to a dissimilarity matrix
-dissimilarity <- as.dist(sqrt(1 - cor_matrix))
+dissimilarity <- as.dist(sqrt(1 - cor_matrix_no_human))
 
 # Perform classical MDS
-mds_result <- cmdscale(dissimilarity, k = 2)  # k = number of dimensions, usually 2 for plotting
+mds_result <- cmdscale(dissimilarity, k = 2)
 
 # Put into a data frame for plotting
 mds_df <- as.data.frame(mds_result)
@@ -544,32 +541,100 @@ mds_df$model_shorthand <- rownames(mds_df)
 mds_df = mds_df %>%
   inner_join(df_summ)
 
-
-
 cor(mds_df$Dim1, mds_df$mean_accuracy)
 cor(mds_df$Dim2, mds_df$mean_accuracy)
-
 
 mds_df = mds_df %>%
   inner_join(results_by_model_path)
 
+# Identify top-performing models for labeling
+top_n_models <- 5  # Adjust this number
+top_models <- mds_df %>%
+  filter(model_shorthand %in% c("Qwen 2.5 7b Instruct", "Olmo 2 13b Dpo")) %>% 
+  pull(model_shorthand)
 
+# Add a column to indicate if model should be labeled
+mds_df <- mds_df %>%
+  mutate(label_model = ifelse(model_shorthand %in% top_models, 
+                               model_shorthand, 
+                               NA))
+
+# Plot with labels
 ggplot(mds_df, aes(Dim1, Dim2, 
                    color = model_family,
                    size = mean_accuracy,
-                   shape = sig)) +
+                   shape = base_instruct)) +
   geom_point(alpha = .5) +
+  geom_text(aes(label = label_model), 
+            size = 3, 
+            hjust = -0.1, 
+            vjust = 0,
+            show.legend = FALSE) +
   theme_minimal() +
   labs(x = "MDS 1",
        y = "MDS 2",
        color = "") +
   theme(text = element_text(size = 15),
-        legend.position = "none") +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
-                                                   begin = 0.8, end = 0.15)) 
+        legend.position = "bottom") +
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
+                                                   begin = 0.8, end = 0.15)) +
+  guides(size = "none",      # Remove size legend
+         shape = "none")
 
 
 
+
+# Convert correlation matrix to long format
+# Just extract the Human row/column directly
+human_cors <- data.frame(
+  model_shorthand = names(cor_matrix["Human", ]),
+  correlation = cor_matrix["Human", ]
+) %>%
+  filter(model_shorthand != "Human") %>%
+  arrange(desc(correlation))
+
+rownames(human_cors) <- NULL
+
+human_cors = human_cors %>%
+  mutate(r2 = correlation ** 2)
+
+summary(human_cors$r2)
+
+human_cors %>%
+  head(3)
+
+human_cors = human_cors %>%
+  inner_join(df_summ) 
+
+
+human_cors %>%
+  ggplot(aes(x = num_params,
+             y = r2,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "#Parameters (Log10)",
+       y = "R2",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
+
+
+
+mod_ppp = lm(data = human_cors,
+               r2 ~ # mean_accuracy + 
+                 log10(num_params) + log10(num_training_tokens)+ base_instruct)
+
+summary(mod_ppp)
 ```
 
 
@@ -657,14 +722,15 @@ summary(glmer_model_comparisons$LRT_stat)
 
 ```
 
+
 ## PPP Analysis
 
-```{r}
+```{r ppp}
 fit_ppp_by_model <- function(df) {
 
   # Fit full model
   mod_full <- tryCatch(
-    glmer(is_start ~ log_odds+
+    glmer(is_start ~ log_odds+first_mention + recent_mention + condition +
             (1 | item_id),
           data = df,
           family = binomial()),
@@ -690,23 +756,27 @@ ppp_models <- df_all_models_with_human %>%
   map_dfr(fit_ppp_by_model) %>%
   inner_join(df_model_properties)
 
+mod_base <- glmer(is_start ~ first_mention + recent_mention + condition + # log_odds+
+          (1 | item_id),
+        data = filter(df_all_models_with_human, model_shorthand == "Qwen 2.5 7b Instruct"),
+        family = binomial())
+  
 ### Rescale AIC
 ppp_models = ppp_models %>%
-  mutate(delta_AIC = AIC - min(AIC),
-         weight = exp(-0.5 * delta_AIC),
-         model_prob = weight / sum(weight))
+  mutate(delta_AIC = AIC - AIC(mod_base))
+
+summary(ppp_models$delta_AIC)
+
+ppp_models %>%
+  arrange(delta_AIC) %>%
+  head(5)
 
 
 ### Add back to original data
 ppp_with_accuracy = ppp_models %>%
-  select(model_shorthand, model_prob, delta_AIC) %>%
+  select(model_shorthand, delta_AIC) %>%
   inner_join(df_summ)
 
-ppp_with_accuracy %>%
-  summarise(
-    weighted_accuracy = sum(mean_accuracy * model_prob),
-    mean_accuracy = mean(mean_accuracy)
-  )
 
 
 ppp_with_accuracy %>%
@@ -717,16 +787,18 @@ ppp_with_accuracy %>%
   geom_point(size = 6,
              alpha = .5) +
   scale_x_log10() +
-  geom_text_repel(aes(label=model_shorthand), size=3) +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
   labs(x = "#Training Tokens",
        y = "Delta AIC",
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
-        legend.position="bottom")
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
 
 
 ppp_with_accuracy %>%
@@ -737,16 +809,18 @@ ppp_with_accuracy %>%
   geom_point(size = 6,
              alpha = .5) +
   scale_x_log10() +
-  geom_text_repel(aes(label=model_shorthand), size=3) +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
   labs(x = "#Parameters",
        y = "Delta AIC",
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
-        legend.position="bottom")
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
 
 ### Among models that >50% accuracy, better models explain more variance in human data
 ppp_with_accuracy %>%
@@ -757,23 +831,24 @@ ppp_with_accuracy %>%
   geom_point(size = 6,
              alpha = .5) +
   scale_x_log10() +
-  geom_text_repel(aes(label=model_shorthand), size=3) +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
   labs(x = "Accuracy",
        y = "Delta AIC",
        color = "",
        shape = "") +
   theme_minimal() +
-  scale_color_manual(values = viridisLite::viridis(8, option = "mako", 
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
                                                   begin = 0.8, end = 0.15)) +
   theme(text = element_text(size = 15),
-        legend.position="bottom")
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
 
 
 
-mod_ppp = lmer(data = ppp_with_accuracy,
-               delta_AIC ~ # mean_accuracy + 
-                 log10(num_params) + log10(num_training_tokens)+
-                 (1 | model_family))
+mod_ppp = lm(data = ppp_with_accuracy,
+               delta_AIC ~ 
+                 log10(num_params) + log10(num_training_tokens)+ base_instruct )
 
 summary(mod_ppp)
 ```
@@ -781,15 +856,15 @@ summary(mod_ppp)
 
 ## Knowledge cue
 
-```{r}
+```{r kc_epistemics}
 mod_full = glmer(is_start ~ condition + knowledge_cue + 
           first_mention + recent_mention +
-          (1 | item_id),
+          (1 + knowledge_cue | item_id),
         data = df_human,
         family = binomial())
 mod_no_kc = glmer(is_start ~ condition + # knowledge_cue + 
           first_mention + recent_mention +
-          (1 | item_id),
+          (1+ knowledge_cue  | item_id),
         data = df_human,
         family = binomial())
 
@@ -841,52 +916,360 @@ results_by_model_path <- df_all_models %>%
 
 
 all_coefs = results_by_model_path %>%
-  select(model_path, knowledge_cue_coef, condition_coef) %>%
-  bind_rows(group_coefs)
+  select(model_path, knowledge_cue_coef, condition_coef) 
+
+summary(all_coefs$knowledge_cue_coef)
+sd(all_coefs$knowledge_cue_coef)
+sd(all_coefs$knowledge_cue_coef)/sqrt(nrow(all_coefs))
+
+summary(all_coefs$condition_coef)
+sd(all_coefs$condition_coef)
+sd(all_coefs$condition_coef)/sqrt(nrow(all_coefs))
+
+### Percentile of human effect (KC)
+percentile <- mean(all_coefs$knowledge_cue_coef >= -1.02) * 100
+percentile
+
+
+### Percentile of human effect (condition)
+percentile <- mean(all_coefs$condition_coef >= -3.78) * 100
+percentile
 
 
 
-all_coefs_long = all_coefs %>%
-  pivot_longer(cols = c(knowledge_cue_coef, condition_coef),
-              names_to = "Term",
-               values_to = "Estimate") %>%
-  mutate(Term = fct_recode(Term, 
-                           "Knowledge Cue (Implicit)" = "knowledge_cue_coef",
-                           "Condition (True Belief)" = "condition_coef"))
+
+### Merge with other data
+df_all_coefs = all_coefs %>%
+  inner_join(df_summ)
+
+summary(lm(data = df_all_coefs, knowledge_cue_coef ~ log10(num_params) +
+             log10(num_training_tokens) + base_instruct))
 
 
-reference_coefs <- all_coefs_long %>%
-  filter(model_path %in% c("Human", "LLMs"))
+### Larger models show bigger effect
+top_models <- df_all_coefs %>%
+  filter(model_shorthand %in% c("Olmo 2 13b Dpo", "Olmo 2 13b")) %>% 
+  pull(model_shorthand)
 
-all_coefs_long %>%
-  filter(model_path != "Human") %>%
-  filter(model_path != "LLMs") %>%
-  ggplot(aes(x = Term,
-             y = Estimate)) +
-  geom_jitter(width = .05, alpha = .3) +
-  geom_point(data = reference_coefs,
-             aes(x = Term, y = Estimate, color = model_path),
-             size = 6,
-             alpha = .8,
-             shape = 18, 
-             inherit.aes = FALSE) +
+# Add a column to indicate if model should be labeled
+df_all_coefs <- df_all_coefs %>%
+  mutate(label_model = ifelse(model_shorthand %in% top_models, 
+                               model_shorthand, 
+                               NA))
+
+df_all_coefs %>%
+  ggplot(aes(x = num_params,
+             y = knowledge_cue_coef,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_hline(yintercept = -1.02, color = "red",
+             linetype = "dotted", size = 1.2, alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label = label_model), 
+            size = 3, 
+            hjust = -0.1, 
+            vjust = 0,
+            show.legend = FALSE) +
   theme_minimal() +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "#Parameters (Log10)",
+       y = "Parameter Estimate (Knowledge Cue)",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
+
+
+
+
+df_all_coefs %>%
+  ggplot(aes(x = num_params,
+             y = condition_coef,
+             color = model_family,
+             shape = base_instruct)) +
+  geom_hline(yintercept = -3.78, color = "red",
+             linetype = "dotted", size = 1.2, alpha = .5) +
+  scale_x_log10() +
+  geom_text_repel(aes(label = label_model), 
+            size = 3, 
+            hjust = -0.1, 
+            vjust = 0,
+            show.legend = FALSE) +
+  theme_minimal() +
+  geom_point(size = 6,
+             alpha = .5) +
+  scale_x_log10() +
+  # geom_text_repel(aes(label=model_shorthand), size=3) +
+  labs(x = "#Parameters (Log10)",
+       y = "Parameter Estimate (Knowledge State)",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  scale_color_manual(values = viridisLite::viridis(5, option = "mako", 
+                                                  begin = 0.8, end = 0.15)) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  guides(color = guide_legend(nrow = 2),     # Wrap colors
+         shape = guide_legend(nrow = 2))     # Wrap shapes
+
+
+
+df_all_coefs %>%
+  ggplot(aes(x = knowledge_cue_coef,
+             y = condition_coef,
+             size = num_params)) +
+  geom_point(alpha = .5) +
+  geom_point(aes(x = -1.02, y = -3.78), color = "red") +
+  annotate("text", x = -1.02, y = -3.78, label = "Human Estimate",
+           hjust = .3, vjust = 1.5, color = "red", size = 4) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
   geom_hline(yintercept = 0, linetype = "dotted") +
-  theme(
-    legend.position = "bottom"
-  ) + 
-  labs(x = "",
-       color = "") + 
-  coord_flip() +
-  theme(axis.title = element_text(size=rel(1.2)),
-        axis.text = element_text(size = rel(1.2)),
-        legend.text = element_text(size = rel(1.2)),
-        legend.title = element_text(size = rel(1.2)),
-        strip.text.x = element_text(size = rel(1.2))) +
-    scale_color_manual(values = viridisLite::viridis(2, option = "mako", 
-                                                    begin = 0.8, end = 0.15))
+  theme_minimal() +
+  labs(x = "Parameter Estimate (Knowledge Cue)",
+       y = "Parameter Estimate (Knowledge State)") + 
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+
+
+
+#### Plot effect of KC across LMs
+# Calculate mean Log Odds for each model and Knowledge Cue
+df_by_kc <- df_all_models %>%
+  group_by(model_path, knowledge_cue) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop")
+
+# Calculate overall mean across all LMs
+df_overall_mean <- df_all_models %>%
+  group_by(knowledge_cue) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop") %>%
+  mutate(model_path = "All LMs Mean")
+
+df_human_mean = df_human %>%
+  group_by(knowledge_cue) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop") %>%
+  mutate(model_path = "Human")
+
+# Plot
+library(ggrepel)
+
+
+# Add labels to the data
+set.seed(1)
+df_overall_mean <- df_overall_mean %>% mutate(label = "LLM Mean")
+df_human_mean <- df_human_mean %>% mutate(label = "Human")
+ggplot(df_by_kc, aes(x = knowledge_cue, y = mean_start)) +
+  geom_jitter(width = 0.1, alpha = 0.3, size = 2, color = "gray40") +
+  geom_point(data = df_overall_mean, 
+             aes(x = knowledge_cue, y = mean_start),
+             color = "#1f77b4", size = 5, shape = 18) +
+  geom_text_repel(data = df_overall_mean,
+                  aes(x = knowledge_cue, y = mean_start, label = label),
+                  size = 4, color = "#1f77b4") +
+  geom_point(data = df_human_mean, 
+             aes(x = knowledge_cue, y = mean_start),
+             color = "#d62728", size = 5, shape = 17) +
+  geom_text_repel(data = df_human_mean,
+                  aes(x = knowledge_cue, y = mean_start, label = label),
+                  size = 4, color = "#d62728") +
+  theme_minimal() +
+  labs(x = "Knowledge Cue",
+       y = "Proportion of Start Responses") +
+  theme(text = element_text(size = 15))
+
+
+
+# Calculate human difference
+df_human_diff <- df_human_mean %>%
+  pivot_wider(names_from = knowledge_cue, values_from = mean_start) %>%
+  mutate(diff = Explicit - Implicit)
+
+human_diff <- df_human_diff$diff
+# Calculate the difference for each model
+df_kc_diff <- df_by_kc %>%
+  pivot_wider(names_from = knowledge_cue, values_from = mean_start) %>%
+  mutate(diff = Explicit - Implicit)  # Adjust these names to match your levels
+
+# Calculate mean difference
+mean_diff <- mean(df_kc_diff$diff)
+
+# Plot the distribution of differences
+ggplot(df_kc_diff, aes(x = diff)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 15, alpha = 0.4) +
+  geom_density(color = "#1f77b4", linewidth = 1.2) +
+  geom_vline(xintercept = mean_diff, color = "#1f77b4", linewidth = 1.5, linetype = "dashed") +
+  geom_vline(xintercept = human_diff, color = "#d62728", linewidth = 1.5, linetype = "solid") +
+  geom_vline(xintercept = 0, color = "black", linetype = "dotted") +
+  annotate("text", x = mean_diff, y = Inf, label = "LLM Mean",
+           hjust = -0.1, vjust = 1.5, color = "#1f77b4", size = 4) +
+  annotate("text", x = human_diff, y = Inf, label = "Human",
+           hjust = -0.1, vjust = 3, color = "#d62728", size = 4) +
+  theme_minimal() +
+  labs(x = "Difference in Proportion Start (Explicit - Implicit)",
+       y = "Density") +
+  theme(text = element_text(size = 15))
+
+
+
+
+#### Do this for condition
+# Calculate mean Log Odds for each model andcondition
+df_by_condition <- df_all_models %>%
+  group_by(model_path, condition) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop")
+
+# Calculate overall mean across all LMs
+df_overall_mean <- df_all_models %>%
+  group_by(condition) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop") %>%
+  mutate(model_path = "All LMs Mean")
+
+df_human_mean = df_human %>%
+  group_by(condition) %>%
+  summarise(mean_start = mean(is_start),
+            .groups = "drop") %>%
+  mutate(model_path = "Human")
+
+# Plot
+library(ggrepel)
+
+
+# Add labels to the data
+set.seed(1)
+df_overall_mean <- df_overall_mean %>% mutate(label = "LLM Mean")
+df_human_mean <- df_human_mean %>% mutate(label = "Human")
+ggplot(df_by_condition, aes(x = condition, y = mean_start)) +
+  geom_jitter(width = 0.1, alpha = 0.3, size = 2, color = "gray40") +
+  geom_point(data = df_overall_mean, 
+             aes(x = condition, y = mean_start),
+             color = "#1f77b4", size = 5, shape = 18) +
+  geom_text_repel(data = df_overall_mean,
+                  aes(x = condition, y = mean_start, label = label),
+                  size = 4, color = "#1f77b4") +
+  geom_point(data = df_human_mean, 
+             aes(x = condition, y = mean_start),
+             color = "#d62728", size = 5, shape = 17) +
+  geom_text_repel(data = df_human_mean,
+                  aes(x = condition, y = mean_start, label = label),
+                  size = 4, color = "#d62728") +
+  theme_minimal() +
+  labs(x = "Knowledge State",
+       y = "Proportion of Start Responses") +
+  theme(text = element_text(size = 15))
+
+
+
+# Calculate human difference
+df_human_diff <- df_human_mean %>%
+  pivot_wider(names_from = condition, values_from = mean_start) %>%
+  mutate(diff = `False Belief` - `True Belief`)
+
+human_diff <- df_human_diff$diff
+# Calculate the difference for each model
+df_cond_diff <- df_by_condition %>%
+  pivot_wider(names_from = condition, values_from = mean_start) %>%
+  mutate(diff = `False Belief` - `True Belief`)  # Adjust these names to match your levels
+
+# Calculate mean difference
+mean_diff <- mean(df_cond_diff$diff)
+
+# Plot the distribution of differences
+ggplot(df_cond_diff, aes(x = diff)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 15, alpha = 0.4) +
+  geom_density(color = "#1f77b4", linewidth = 1.2) +
+  geom_vline(xintercept = mean_diff, color = "#1f77b4", linewidth = 1.5, linetype = "dashed") +
+  geom_vline(xintercept = human_diff, color = "#d62728", linewidth = 1.5, linetype = "solid") +
+  geom_vline(xintercept = 0, color = "black", linetype = "dotted") +
+  annotate("text", x = mean_diff, y = Inf, label = "LLM Mean",
+           hjust = -0.1, vjust = 1.5, color = "#1f77b4", size = 4) +
+  annotate("text", x = human_diff, y = Inf, label = "Human",
+           hjust = 1.1, vjust = 3, color = "#d62728", size = 4) +
+  theme_minimal() +
+  labs(x = "Difference in Proportion Start (FB - TB)",
+       y = "Density") +
+  theme(text = element_text(size = 15))
 
 
 ```
 
+### Baselines analysis (knowledge cue)
+
+Now, fit a baselines model for each LLM.
+
+
+```{r}
+fit_compare_glmer_by_model <- function(df) {
+  if (n_distinct(df$is_start) < 2) return(NULL)  # skip degenerate cases
+
+  # Fit full model
+  mod_full <- tryCatch(
+    glmer(is_start ~ condition + knowledge_cue + 
+            first_mention + recent_mention + log_odds +
+            (1 | item_id),
+          data = df,
+          family = binomial()),
+    error = function(e) NULL
+  )
+
+  # Fit reduced model (no condition)
+  mod_reduced <- tryCatch(
+    glmer(is_start ~ condition + 
+            first_mention + recent_mention + log_odds +
+            (1 | item_id),
+          data = df,
+          family = binomial()),
+    error = function(e) NULL
+  )
+
+  if (is.null(mod_full) || is.null(mod_reduced)) return(NULL)
+
+  # Model comparison (Likelihood Ratio Test)
+  anova_result <- anova(mod_reduced, mod_full)
+  lrt_stat <- anova_result$Chisq[2]
+  p_val <- anova_result$`Pr(>Chisq)`[2]
+  delta_aic <- AIC(mod_reduced) - AIC(mod_full)
+
+  # Extract coefficient for log_odds
+  log_odds_coef <- tryCatch({
+    fixef(mod_full)["log_odds"]
+  }, error = function(e) NA)
+
+  tibble(
+    model_shorthand = unique(df$model_shorthand),
+    delta_AIC = delta_aic,
+    LRT_stat = lrt_stat,
+    p_value = p_val,
+    log_odds_coef = log_odds_coef,
+    knowledge_cue_coef = fixef(mod_full)["knowledge_cueImplicit"],
+    condition_coef = fixef(mod_full)["conditionTrue Belief"],
+    
+  )
+}
+
+# Apply across model_shorthand groups
+glmer_model_comparisons <- df_all_models_with_human %>%
+  group_by(model_shorthand) %>%
+  group_split() %>%
+  map_dfr(fit_compare_glmer_by_model)
+
+glmer_model_comparisons
+
+summary(glmer_model_comparisons$log_odds_coef)
+summary(glmer_model_comparisons$knowledge_cue_coef)
+summary(glmer_model_comparisons$condition_coef)
+summary(glmer_model_comparisons$LRT_stat)
+
+```
 
